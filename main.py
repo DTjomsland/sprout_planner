@@ -1,13 +1,19 @@
-from flask import Flask
+from flask import Flask, jsonify
 from flask_sqlalchemy import SQLAlchemy
 from flask_marshmallow import Marshmallow
+import psycopg2
 
 app = Flask(__name__)
+
+app.config['SQLALCHEMY_DATABASE_URI'] = "postgresql+psycopg2://david:Cygyxy64rtfg@localhost:5432/sprout_planner"
+app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = True
 
 db = SQLAlchemy(app)
 ma = Marshmallow(app)
 
-app.config["SQLALCHEMY_DATABASE_URI"] = "postgresql+psycopg2://david:Cygyxy64rtfg@localhost:5432/sprout_planner"
+class CardSchema(ma.Schema):
+    class Meta:
+        fields = ('user_id', 'user_email', 'user_password')
 
 
 # User table creation
@@ -24,7 +30,7 @@ def create_db():
     db.create_all()
     print("Creating tables...")
 
-
+# Seeding the database
 @app.cli.command('seed')
 def seed_db():
     users = Users(
@@ -41,5 +47,12 @@ def seed_db():
 def welcome():
     return "Sprout Planner under construction"
 
+@app.route('/users')
+def users():
+    users_list = Users.query.all()
+    result = CardSchema(many=True).dump(users_list)
+    return jsonify(result)
+
+
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(host='0.0.0.0')
