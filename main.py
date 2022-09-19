@@ -1,8 +1,9 @@
-from flask import Flask, jsonify
+from flask import Flask, jsonify, request, abort
 from flask_sqlalchemy import SQLAlchemy
 from flask_marshmallow import Marshmallow
 from marshmallow.validate import Length
 import psycopg2
+from flask_bcrypt import Bcrypt
 
 app = Flask(__name__)
 
@@ -11,6 +12,7 @@ app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = True
 
 db = SQLAlchemy(app)
 ma = Marshmallow(app)
+bcrypt = Bcrypt(app)
 
 class UserSchema(ma.Schema):
     class Meta:
@@ -39,21 +41,21 @@ def create_db():
 @app.cli.command('drop')
 def drop_db():
     db.drop_all()
-    print("Dropped tables...")
+    print("Dropping tables...")
 
 # Seeding the database
 @app.cli.command('seed')
 def seed_db():
     users = Users(
-        user_email="user@gmail.com",
-        user_password="password"
+        user_email = "user@gmail.com",
+        user_password = bcrypt.generate_password_hash("password").decode("utf-8"),
     )
 
     db.session.add(users)
 
     admin = Users(
         user_email = "admin@gmail.com",
-        user_password = "admin",
+        user_password = bcrypt.generate_password_hash("password").decode("utf-8"),
         admin = True
     )
 
@@ -66,12 +68,34 @@ def seed_db():
 def welcome():
     return "Sprout Planner under construction"
 
-@app.route('/users')
-def users():
-    users_list = Users.query.all()
-    result = users_schema.dump(users_list)
-    return jsonify(result)
+@app.route('/auth/register', methods=['POST'])
+def auth_register():
+   
+    user_fields = user_schema.load(request.json)
+    print(user_fields["user_email"])
+    print(user_fields["user_password"])
 
+    user = Users(
+        user_email = user_fields["user_email"],
+        user_password = bcrypt.generate_password_hash(user_fields["user_password"]).decode("utf-8"),
+   )
+
+    db.session.add(user)
+
+    db.session.commit()
+    return jsonify((user_schema).dump(user))
+
+@app.route('/auth/login', methods=['POST'])
+def auth_login():
+
+    user_fields = user_schema.load(request.json)
+
+    user = Users.query.filter_by(user_email=user_fields["user_email"]).first()
+
+    if not user:
+        return abort(401, description = "User not found")
+        
+    return "valid login"
 
 if __name__ == '__main__':
     app.run(debug=True)
