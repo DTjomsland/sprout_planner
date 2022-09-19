@@ -3,7 +3,7 @@ from flask_sqlalchemy import SQLAlchemy
 
 
 # from datetime import timedelta
-# from flask_marshmallow import Marshmallow
+from flask_marshmallow import Marshmallow
 # from marshmallow.validate import Length
 # import psycopg2
 # import config
@@ -12,7 +12,7 @@ from flask_bcrypt import Bcrypt
 
 
 db = SQLAlchemy()
-
+ma = Marshmallow()
 bcrypt = Bcrypt()
 
 def create_app():
