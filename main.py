@@ -1,18 +1,24 @@
 from flask import Flask, jsonify, request, abort
 from flask_sqlalchemy import SQLAlchemy
+from datetime import timedelta
 from flask_marshmallow import Marshmallow
 from marshmallow.validate import Length
 import psycopg2
 from flask_bcrypt import Bcrypt
+from flask_jwt_extended import JWTManager, create_access_token, jwt_required
 
 app = Flask(__name__)
 
 app.config['SQLALCHEMY_DATABASE_URI'] = "postgresql+psycopg2://david:Cygyxy64rtfg@localhost:5432/sprout_planner"
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = True
+app.config['JWT_SECRET_KEY'] = "This is a secret"
+
 
 db = SQLAlchemy(app)
 ma = Marshmallow(app)
 bcrypt = Bcrypt(app)
+jwt = JWTManager(app)
+
 
 class UserSchema(ma.Schema):
     class Meta:
@@ -65,6 +71,7 @@ def seed_db():
     print("Seeding tables...")
 
 @app.route('/')
+@jwt_required()
 def welcome():
     return "Sprout Planner under construction"
 
@@ -92,10 +99,11 @@ def auth_login():
 
     user = Users.query.filter_by(user_email=user_fields["user_email"]).first()
 
-    if not user:
-        return abort(401, description = "User not found")
-        
-    return "valid login"
+    if not user or not bcrypt.check_password_hash(user.user_password, user_fields["user_password"]):
+        return abort(401, description = "Invalid Username or Password")
+    
+    access_token = create_access_token(identity=str(user.user_id), expires_delta=timedelta(days=1))
+    return jsonify({"user": user.user_email, "token": access_token})
 
 if __name__ == '__main__':
     app.run(debug=True)
