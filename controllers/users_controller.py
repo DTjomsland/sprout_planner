@@ -1,8 +1,10 @@
-from flask import Blueprint, jsonify
+from flask import Blueprint, jsonify, request, abort
 from main import db, bcrypt, ma
 from models.users import Users
-from flask_jwt_extended import JWTManager, create_access_token, jwt_required
+from flask_jwt_extended import  create_access_token
 from marshmallow.validate import Length
+
+
 
 users = Blueprint('users', __name__, url_prefix='/users')
 
@@ -14,7 +16,7 @@ class UserSchema(ma.Schema):
 user_schema = UserSchema()
 users_schema = UserSchema(many=True)
 
-@app.route('/register', methods=['POST'])
+@users.route('/register', methods=['POST'])
 def account_register():
    
     user_fields = user_schema.load(request.json)
@@ -31,7 +33,7 @@ def account_register():
     db.session.commit()
     return jsonify((user_schema).dump(user))
     
-@app.route('/login', methods=['POST'])
+@users.route('/login', methods=['POST'])
 def account_login():
 
     user_fields = user_schema.load(request.json)
