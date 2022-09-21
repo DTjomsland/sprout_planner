@@ -8,4 +8,4 @@ icon = Blueprint('icon', __name__, url_prefix='/icon')
 
 class IconSchema(ma.Schema):
     class Meta:
-        fields = ('icon_id', 'icon_url')
+        fields = ('user_icon_id', 'icon_url')
