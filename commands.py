@@ -126,6 +126,7 @@ def seed_db():
     seed_user_icon()
     db.session.commit()
 
+    #Seeding User Category
     def seed_user_category():
         user_categories = ('default','randomcat', 'randomcat', 'randomcat')
         for i in user_categories:
