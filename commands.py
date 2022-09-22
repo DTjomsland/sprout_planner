@@ -77,9 +77,7 @@ def seed_db():
     seed_category()
     db.session.commit()
 
-
-    
-    # Seeding Activities
+# Seeding Activities
     custom = Activity(
         activity_name = 'custom',
         icon_id = 1,
@@ -117,18 +115,4 @@ def seed_db():
     db.session.add(walk)
     db.session.commit()
 
-    # user_activity = UserActivity(
-    #     # user_activity_id = '1',
-    #     user_activity_name = 'Basketball',
-    #     # user_icon_id = '1',
-    #     # icon_id = '1',
-    #     # user_category_id = '2',
-    #     # category_id = '1',
-    #     user_id = '1',
-    # )
-
-    # db.session.add(user_activity)
-
-
-    db.session.commit()
     print("Seeding tables...")
