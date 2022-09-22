@@ -14,9 +14,6 @@ users = Blueprint('users', __name__, url_prefix='/users')
 def account_register():
    
     user_fields = user_schema.load(request.json)
-    print(user_fields["user_email"])
-    print(user_fields["user_password"])
-
     user = Users(
         user_email = user_fields["user_email"],
         user_password = bcrypt.generate_password_hash(user_fields["user_password"]).decode("utf-8"),

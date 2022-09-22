@@ -6,9 +6,9 @@ from main import bcrypt
 from models.activity import Activity
 from models.user_activity import UserActivity
 from models.category import Category
-# from models.user_category import UserCategory
+from models.user_category import UserCategory
 from models.icon import Icon
-# from models.user_icon import UserIcon
+from models.user_icon import UserIcon
 
 
 db_commands = Blueprint("db", __name__)
@@ -114,5 +114,27 @@ def seed_db():
     db.session.add(soccer)
     db.session.add(walk)
     db.session.commit()
+
+    # Seeding User Icon
+    def seed_user_icon():
+        user_icons = ('default','randomurl', 'randomurl2', 'randomurl3')
+        for i in user_icons:
+            user_icon = UserIcon(
+                user_icon_url = i, 
+            )
+            db.session.add(user_icon)
+    seed_user_icon()
+    db.session.commit()
+
+    def seed_user_category():
+        user_categories = ('default','randomcat', 'randomcat', 'randomcat')
+        for i in user_categories:
+            user_category = UserCategory(
+                user_category_name = i, 
+            )
+            db.session.add(user_category)
+    seed_user_category()
+    db.session.commit()
+    
 
     print("Seeding tables...")
