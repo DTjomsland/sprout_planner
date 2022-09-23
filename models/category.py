@@ -6,5 +6,5 @@ class Category(db.Model):
     
     # Category columns
     category_id = db.Column(db.Integer, primary_key=True)
-    category_name = db.Column(db.String, nullable=False)
+    category_name = db.Column(db.String)
    

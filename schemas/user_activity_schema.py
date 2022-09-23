@@ -1,4 +1,6 @@
 from main import ma
+from marshmallow import fields
+
 
 # Schema for user activity table
 class UserActivitySchema(ma.Schema):

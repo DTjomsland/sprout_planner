@@ -8,8 +8,6 @@ from schemas.user_activity_schema import user_activity_schema, user_activities_s
 # Default route for all user activity requests
 user_activity = Blueprint('user_activity', __name__, url_prefix='/useractivity')
 
-
-
 # Get request for all user activities
 @user_activity.route('/', methods=['GET'])
 def get_user_activities():
@@ -23,6 +21,7 @@ def get_user_activity(user_activity_id):
     user_activity = UserActivity.query.get(user_activity_id)
     result = user_activity_schema.dump(user_activity)
     return jsonify(result)
+
 
 
 # Post a new activity into the user activity table

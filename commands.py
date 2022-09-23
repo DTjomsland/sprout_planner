@@ -26,12 +26,12 @@ def drop_db():
 @db_commands.cli.command('seed')
 def seed_db():
     # Seeding first user
-    users = Users(
+    user1 = Users(
         user_email = "user@gmail.com",
         user_password = bcrypt.generate_password_hash("password").decode("utf-8"),
     )
 
-    db.session.add(users)
+    db.session.add(user1)
     db.session.commit()
     
     #Seeding first admin
@@ -77,7 +77,7 @@ def seed_db():
     seed_category()
     db.session.commit()
 
-# Seeding Activities
+    # Seeding Activities
     custom = Activity(
         activity_name = 'custom',
         icon_id = 1,
@@ -137,5 +137,26 @@ def seed_db():
     seed_user_category()
     db.session.commit()
     
+    # Seeding User Activity
+    
+    default = UserActivity(
+        user_activity_name = 'default',
+        user_icon_id = 1,
+        icon_id = 2,
+        user_category_id = 1,
+        category_id = 2,
+        user = admin,
+    )
+    db.session.add(default)
 
+    jog = UserActivity(
+        user_activity_name = 'Jog',
+        user_icon_id = 2,
+        icon_id = 1,
+        user_category_id = 2,
+        category_id = 1,
+        user = user1,
+    )
+    db.session.add(jog)
+    db.session.commit()
     print("Seeding tables...")

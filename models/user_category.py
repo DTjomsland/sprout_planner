@@ -5,5 +5,5 @@ class UserCategory(db.Model):
     
     # User category columns
     user_category_id = db.Column(db.Integer, primary_key=True)
-    user_category_name = db.Column(db.String, nullable=False)
+    user_category_name = db.Column(db.String)
    

@@ -5,5 +5,5 @@ class Icon(db.Model):
     
     # Icon columns
     icon_id = db.Column(db.Integer, primary_key=True)
-    icon_url = db.Column(db.String, nullable=False)
+    icon_url = db.Column(db.String)
    

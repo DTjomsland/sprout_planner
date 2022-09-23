@@ -5,5 +5,5 @@ class UserIcon(db.Model):
     
     # User icon columns
     user_icon_id = db.Column(db.Integer, primary_key=True)
-    user_icon_url = db.Column(db.String, nullable=False)
+    user_icon_url = db.Column(db.String)
    
