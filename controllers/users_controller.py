@@ -22,7 +22,7 @@ def get_users():
 
 
 
-
+# Register users
 
 @users.route('/register', methods=['POST'])
 def account_register():

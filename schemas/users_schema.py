@@ -8,7 +8,7 @@ class UserSchema(ma.Schema):
     class Meta:
         fields = ['user_id', 'user_email', 'user_password', 'admin', 'activities']
     password = ma.String(validate=Length(min=8))
-    activity = fields.Nested(UserActivitySchema)
+    activities = fields.List(fields.Nested(UserActivitySchema))
 # Single user icon schema
 user_schema = UserSchema()
 # Multiple user icon schema
