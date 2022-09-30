@@ -11,5 +11,5 @@ class Users(db.Model):
     admin = db.Column(db.Boolean, default=False)
     categories = db.relationship(
         "UserCategory",
-        backref= "user"
+        backref= "user",
     )
