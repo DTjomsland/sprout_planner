@@ -1,4 +1,6 @@
 from main import db
+from flask import jsonify, request
+
 
 class UserActivity(db.Model):
     __tablename__="user_activity"
@@ -11,3 +13,4 @@ class UserActivity(db.Model):
         "UserIcon",
         backref = "activity"
     )
+

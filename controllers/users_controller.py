@@ -10,35 +10,39 @@ from sqlalchemy import select, join
 
 
 # Default route for all users requests
-users = Blueprint('users', __name__, url_prefix='/users')
-
-@users.route('/', methods=['GET'])
-def get_users():
-    users = Users.query.all()
-    result = users_schema.dump(users)
-    return jsonify(result)
+users = Blueprint('users', __name__, url_prefix='/user')
 
 
-# Register users
 
+# Register new users
 @users.route('/register', methods=['POST'])
 def account_register():
-   
+    # Takes in data from the POST
     user_fields = user_schema.load(request.json)
+    # Checks to see if the email is already in use.
     user = Users.query.filter_by(user_email = user_fields["user_email"]).first()
+    # Returns an error if the email is already in use.
     if user:
         return {"error": "An account has already been created with this email address."}
+    
+    # Creates a new user object from entered information.
     user = Users(
         user_name = user_fields["user_name"],
         user_email = user_fields["user_email"],
         user_password = bcrypt.generate_password_hash(user_fields["user_password"]).decode("utf-8"),
    )
 
+    # Stages the new user object
     db.session.add(user)
-
+    # Commits the new user object to the database.
     db.session.commit()
-    return jsonify((user_schema).dump(user))
+
+    token = create_access_token(identity=str(user.user_id), expires_delta=timedelta(days=30)) 
     
+    return {"user_name": user.user_name, "token": token}
+    
+
+# Login existing users
 @users.route('/login', methods=['POST'])
 def account_login():
 
@@ -49,5 +53,6 @@ def account_login():
     if not user or not bcrypt.check_password_hash(user.user_password, user_fields["user_password"]):
         return abort(401, description = "Invalid Username or Password")
     
+    # Return the access token with the user_name(For Display Use)
     access_token = create_access_token(identity=str(user.user_id), expires_delta=timedelta(days=1))
-    return jsonify({"user": user.user_email, "token": access_token})
+    return jsonify({"user": user.user_name, "token": access_token})
