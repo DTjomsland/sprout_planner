@@ -14,13 +14,7 @@ def get_user_categories():
     result = user_categories_schema.dump(user_categories)
     return jsonify(result)
 
-# Get request for single user category
-@user_category.route('/<int:user_category_id>', methods=['GET'])
-def get_user_category(user_category_id):
-    user_category = UserCategory.query.get(user_category_id)
-    result = user_category_schema.dump(user_category)
-    return jsonify(result)
-
+# Create user category
 @user_category.route('/create', methods=['POST'])
 def new_category():
     category_fields = user_category_schema.load(request.json)

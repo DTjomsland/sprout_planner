@@ -19,16 +19,17 @@ def get_users():
     return jsonify(result)
 
 
-
-
-
 # Register users
 
 @users.route('/register', methods=['POST'])
 def account_register():
    
     user_fields = user_schema.load(request.json)
+    user = Users.query.filter_by(user_email = user_fields["user_email"]).first()
+    if user:
+        return {"error": "An account has already been created with this email address."}
     user = Users(
+        user_name = user_fields["user_name"],
         user_email = user_fields["user_email"],
         user_password = bcrypt.generate_password_hash(user_fields["user_password"]).decode("utf-8"),
    )

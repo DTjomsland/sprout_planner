@@ -6,5 +6,8 @@ class UserCategory(db.Model):
     # User category columns
     user_category_id = db.Column(db.Integer, primary_key=True)
     user_category_name = db.Column(db.String)
-    user_id = db.Column(db.Integer)
-    activities = db.relationship("UserActivity", backref ='category')
+    user_id = db.Column(db.Integer, db.ForeignKey('users.user_id'))
+    activities = db.relationship(
+        "UserActivity",
+        backref = "category"
+    )
