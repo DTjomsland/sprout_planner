@@ -7,7 +7,7 @@ from schemas.user_category_schema import user_category_schema, user_categories_s
 # Default route for all user category requests
 user_category = Blueprint('user_category', __name__, url_prefix='/usercategory')
 
-# Get request for all user categories
+# Get request for all user categories for logged in user
 @user_category.route('/', methods=['GET'])
 # Requires token
 @jwt_required()
