@@ -47,7 +47,7 @@ def new_feeling():
     return jsonify((user_feeling_schema).dump(feeling))
 
 
-@user_feeling.route("/<int:feeling_id>", methods=["PUT"])
+@user_feeling.route("/<int:user_feeling_id>", methods=["PUT"])
 @jwt_required()
 def update_feeling(user_feeling_id):
     # Retrieve user information from jwt token

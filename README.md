@@ -288,7 +288,7 @@ Expected Response Example:
 
 <br>
 
-<!-- ### <strong>Endpoint: </strong>/useractivity/\<int:user_category_id>/\<int:activity_id>
+### <strong>Endpoint: </strong>/useractivity/\<int:user_category_id>/\<int:activity_id>
 
 HTTP request verb: PUT
 
@@ -298,27 +298,29 @@ Required data example:
 
 ```
 {
-    "user_activity_name": "Swimming"
+    "user_activity_name": "Jogging"
 }
 ```
 Expected Response Example 1 (If the user hasn't used that activity name yet):
 
 ```
 {
-    "user_category_name": "Free Time",
-    "activities": [],
-    "user_category_id": 1,
-    "user_id": 1
+    "user_activity_name": "Jogging",
+    "user_activity_id": 9,
+    "user_category_id": 3,
+    "icons": null
 }
 ```
 Expected Response Example 2 (If the user has used that category name already):
 
 ```
 {
-    "error": "A category with that name already exists."
+    "error": "An activity with that name already exists."
 }
-``` -->
+```
+---
 
+<br>
 
 ### <strong>Endpoint: </strong>/useractivity/\<int:user_activity_id>
 
@@ -342,6 +344,8 @@ Expected Response Two (If user activity doesn't exist):
 }
 ```
 ---
+
+<br>
 
 ### <strong>Endpoint: </strong>/usericon/<int:user_activity_id>/upload"
 
@@ -412,6 +416,199 @@ Expected Response Two (If user icon doesn't exist):
 }
 ```
 ---
+
+<br>
+
+### <strong>Endpoint: </strong>/userfeeling/create
+
+HTTP request verb: POST
+
+Authentication Requirement: User Token
+
+Required data example:
+
+```
+{
+    "user_feeling_name": "Frustrated"
+}
+```
+Expected Response Example One (If the user hasn't created that feeling yet):
+
+```
+{
+    "feeling_icon": [],
+    "user_id": 1,
+    "user_feeling_id": 8,
+    "user_feeling_name": "Frustrated"
+}
+```
+Expected Response Example Two (If the user has created that feeling already):
+
+```
+{
+    "error": "A feeling with that name already exists."
+}
+```
 ---
+<br>
+
+### <strong>Endpoint: </strong>/userfeeling
+
+HTTP request verb: GET
+
+Authentication Requirement: User Token
+
+Expected Response Example:
+```
+[
+    {
+        "user_feeling_id": 3,
+        "user_feeling_name": "Angry"
+    },
+    {
+        "user_feeling_id": 4,
+        "user_feeling_name": "Tired"
+    },
+    {
+        "user_feeling_id": 8,
+        "user_feeling_name": "Frustrated"
+    }
+]
+```
+---
+
+<br>
+
+### <strong>Endpoint: </strong>/userfeeling/<int:user_feeling_id>
+
+HTTP request verb: PUT
+
+Authentication Requirement: User Token
+
+Required data example:
+
+```
+{
+    "user_feeling_name": "Excited"
+}
+```
+Expected Response Example One (If the user hasn't used that feeling name yet):
+
+```
+{
+    "user_id": 1,
+    "feeling_icon": [],
+    "user_feeling_name": "Excited",
+    "user_feeling_id": 8
+}
+```
+Expected Response Example Two (If the user has used that feeling name already):
+
+```
+{
+    "error": "A feeling with that name already exists."
+}
+```
+---
+
+<br>
+
+### <strong>Endpoint: </strong>/userfeeling/\<int:user_feeling_id>
+
+HTTP request verb: DELETE
+
+Authentication Requirement: User Token
+
+Expected Response One (If user feeling exists):
+
+```
+{
+    "message": "Feeling deleted successfully."
+}
+```
+
+Expected Response Two (If user feeling doesn't exist):
+
+```
+{
+    "error": "Feeling does not exist."
+}
+```
+---
+
+<br>
+
+### <strong>Endpoint: </strong>/userfeelingicon/\<int:user_feeling_id>/upload
+HTTP request verb: POST
+
+Authentication Requirement: User Token
+
+Required data example (image upload):
+
+![image](images/uploadinput.PNG)
+
+Expected Response Example One (If the feeling did not have an associated image):
+
+```
+{
+    "user_feeling_icon_url": "http://res.cloudinary.com/dydrnv83j/image/upload/v1664637570/wwpjlrzqiqjx5apytfih.png",
+    "user_feeling_icon_id": 7
+}
+```
+
+Expected Response Example Two (If the feeling did have an associated image):
+
+```
+{
+    "error": "An image is already associated with this feeling."
+}
+```
+---
+
+<br>
+
+### <strong>Endpoint: </strong>/userfeelingicon/\<int:user_feeling_id>
+
+HTTP request verb: GET
+
+Authentication Requirement: User Token
+
+Expected Response Example:
+```
+[
+    {
+        "user_feeling_icon_id": 8,
+        "user_feeling_icon_url": "http://res.cloudinary.com/dydrnv83j/image/upload/v1664637716/zpbylhcztsgfqbli1hrg.png"
+    }
+]
+```
+---
+
+<br>
+
+### <strong>Endpoint: </strong>/userfeelingicon/\<int:user_feeling_icon_id>
+
+HTTP request verb: DELETE
+
+Authentication Requirement: User Token
+
+Expected Response One (If feeling icon exists):
+
+```
+{
+    "message": "Image deleted successfully"
+}
+```
+
+Expected Response Two (If feeling icon doesn't exist):
+
+```
+{
+    "error": "Image not found"
+}
+```
+---
+
+
 ## Entity Relationship Diagram for the API
 ![image](images/sprouterd.PNG)
