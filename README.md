@@ -6,7 +6,7 @@ This API provides data for a simple daily planner that has an intended audience 
 
 
 
-### Intended Use of Account Creation Features
+### Intended Use of Account Creation Features:
 
 ![image](images/sproutimg.PNG)
 
@@ -14,7 +14,7 @@ This API provides data for a simple daily planner that has an intended audience 
 
 
 
-### Intended Use of Category Creation and Editing Features
+### Intended Use of Category Creation and Editing Features:
 
 ![image](images/sproutimg3.PNG)
 
@@ -22,7 +22,7 @@ This API provides data for a simple daily planner that has an intended audience 
 
 
 
-### Intended Use of Category Creation and Editing Features
+### Intended Use of Category Creation and Editing Features:
 
 ![image](images/sproutimg4.PNG)
 
@@ -30,13 +30,13 @@ This API provides data for a simple daily planner that has an intended audience 
 
 
 
-### Intended Use of the Data Overall
+### Intended Use of the Data Overall:
 
 ![image](images/sproutimg2.PNG)
 
 <br>
 
----
+
 
 ## Identification of the problem
 The problem I am trying to solve with this application is the lack of a means for some with special needs/disabilities to communicate their feelings and how they want their day to be structured. During my time as a high school special needs teacher and  as a support worker, I've worked with countless individuals that are unable to communicate through speech, often needing visual help to communicate.  This application intends to provide a way for those who are unable to communicate verbally to gain autonomy by providing them a way to communicate their feelings, as well sa the structure of their day.
