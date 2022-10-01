@@ -58,6 +58,7 @@ The database system used for this API is PostgreSQL.  PostgreSQL is an open sour
 Despite the benefits, their are some drawbacks to choosing PostgreSQL.  In regards to performance, PostgreSQL is slower than competitors such as MySQL. PostgreSQL places compatibility at the top of it's list, so changes for improvements in speed are more involved than its competitors. Overall, I found PostgreSQL easy to work with despite being rather green in the API world.
 
 
+<br>
 
 ## Entity Relationship Diagram for the API
 ![image](images/sprouterd.PNG)
