@@ -39,11 +39,11 @@ This API provides data for a simple daily planner that has an intended audience 
 
 
 ## Identification of the problem
-The problem I am trying to solve with this application is the lack of a means for some with special needs/disabilities to communicate their feelings and how they want their day to be structured. During my time as a high school special needs teacher and  as a support worker, I've worked with countless individuals that are unable to communicate through speech, often needing visual help to communicate.  This application intends to provide a way for those who are unable to communicate verbally to gain autonomy by providing them a way to communicate their feelings, as well sa the structure of their day.
+The problem I am trying to solve with this application is the lack of a means for some with special needs/disabilities to communicate their feelings and how they want their day to be structured. During my time as a high school special needs teacher and  as a support worker, I've worked with countless individuals that are unable to communicate through speech, often needing visual help to communicate.  This application intends to provide a way for those who are unable to communicate verbally to gain autonomy by providing them a way to communicate their feelings, as well as the structure of their day.
 
 <br>
 
----
+
 
 ## Why it needs to be solved
 
@@ -61,7 +61,7 @@ This problem needs to be solved because far too many individuals are unable to c
 
 <br>
 
----
+
 ## API Endpoints
 
 
@@ -169,19 +169,249 @@ Expected Response Example:
 ]
 ```
 
+---
+
+### <strong>Endpoint: </strong>/usercategory/<int:user_category_id>
+
+HTTP request verb: PUT
+
+Authentication Requirement: User Token
+
+Required data example:
+
+```
+{
+    "user_category_name": "Free Time"
+}
+```
+Expected Response Example 1 (If the user hasn't used that category name yet):
+
+```
+{
+    "user_category_name": "Free Time",
+    "activities": [],
+    "user_category_id": 1,
+    "user_id": 1
+}
+```
+Expected Response Example 2 (If the user has used that category name already):
+
+```
+{
+    "error": "A category with that name already exists."
+}
+```
+---
+<br>
+
+### <strong>Endpoint: </strong>/usercategory/\<int:user_category_id>
+
+HTTP request verb: DELETE
+
+Authentication Requirement: User Token
+
+Expected Response Example 1 (If user category exists):
+
+```
+{
+    "message": "Category deleted successfully."
+}
+```
+
+Expected Response Example 2 (If user category doesn't exist):
+
+```
+{
+    "error": "Category does not exist."
+}
+```
+---
+
+<br>
+
+### <strong>Endpoint: </strong>/useractivity/\<int:user_category_id>/create
+
+HTTP request verb: POST
+
+Authentication Requirement: User Token
+
+Required data example:
+
+```
+{
+    "user_activity_name": "Swimming"
+}
+```
+
+Expected Response Example 1 (If the user hasn't used that activity name yet):
+
+```
+{
+    "user_activity_id": 9,
+    "icons": null,
+    "user_activity_name": "Swimming",
+    "user_category_id": 3
+}
+```
+
+Expected Response Example 2 (If the user has used that activity name already):
+
+```
+{
+    "error": "An activity with that name already exists."
+}
+```
+---
+
+<br>
+
+### <strong>Endpoint: </strong>/useractivity/\<int:user_category_id>
+
+HTTP request verb: GET
+
+Authentication Requirement: User Token
+
+Expected Response Example:
+```
+[
+    {
+        "user_activity_id": 3,
+        "user_activity_name": "Lasagna"
+    },
+    {
+        "user_activity_id": 9,
+        "user_activity_name": "Swimming"
+    }
+]
+```
+---
+
+<br>
+
+<!-- ### <strong>Endpoint: </strong>/useractivity/\<int:user_category_id>/\<int:activity_id>
+
+HTTP request verb: PUT
+
+Authentication Requirement: User Token
+
+Required data example:
+
+```
+{
+    "user_activity_name": "Swimming"
+}
+```
+Expected Response Example 1 (If the user hasn't used that activity name yet):
+
+```
+{
+    "user_category_name": "Free Time",
+    "activities": [],
+    "user_category_id": 1,
+    "user_id": 1
+}
+```
+Expected Response Example 2 (If the user has used that category name already):
+
+```
+{
+    "error": "A category with that name already exists."
+}
+``` -->
 
 
+### <strong>Endpoint: </strong>/useractivity/\<int:user_activity_id>
 
+HTTP request verb: DELETE
 
+Authentication Requirement: User Token
 
+Expected Response 1 (If user activity exists):
 
+```
+{
+    "message": "Activity deleted successfully."
+}
+```
 
+Expected Response 2 (If user activity doesn't exist):
 
+```
+{
+    "error": "Activity does not exist."
+}
+```
+---
 
+### <strong>Endpoint: </strong>/usericon/<int:user_activity_id>/upload"
 
+HTTP request verb: POST
 
+Authentication Requirement: User Token
 
+Required data example (image upload):
 
+![image](images/uploadinput.PNG)
 
+Expected Response Example 1 (If the activity did not have an associated image):
+
+```
+{
+    "user_icon_id": 6,
+    "user_icon_url": "http://res.cloudinary.com/dydrnv83j/image/upload/v1664635754/wd3nljxkp8cq6jpcgjlk.png"
+}
+```
+
+Expected Response Example 2 (If the activity did have an associated image):
+
+```
+{
+    "error": "An image is already associated with this activity."
+}
+```
+<br>
+
+### <strong>Endpoint: </strong>/usericon/\<int:user_activity_id>
+
+HTTP request verb: GET
+
+Authentication Requirement: User Token
+
+Expected Response Example:
+```
+[
+    {
+        "user_icon_id": 6,
+        "user_icon_url": "http://res.cloudinary.com/dydrnv83j/image/upload/v1664635754/wd3nljxkp8cq6jpcgjlk.png"
+    }
+]
+```
+---
+
+<br>
+
+### <strong>Endpoint: </strong>/usericon/\<int:user_icon_id>
+
+HTTP request verb: DELETE
+
+Authentication Requirement: User Token
+
+Expected Response 1 (If user icon exists):
+
+```
+{
+    "message": "Image deleted successfully"
+}
+```
+
+Expected Response 2 (If user icon doesn't exist):
+
+```
+{
+    "error": "Image does not exist"
+}
+```
+---
+---
 ## Entity Relationship Diagram for the API
 ![image](images/sprouterd.PNG)

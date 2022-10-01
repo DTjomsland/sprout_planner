@@ -46,14 +46,14 @@ def new_category():
     return jsonify((user_category_schema).dump(category))
 
 
-@user_category.route("/<int:id>", methods=["PUT"])
+@user_category.route("/<int:user_category_id>", methods=["PUT"])
 @jwt_required()
-def update_category(id):
+def update_category(user_category_id):
     # Retrieve user information from jwt token
     user = get_jwt_identity()
     # Find the category in the database
     # Check to see if the category exists/return error if it does not
-    category = UserCategory.query.get(id)
+    category = UserCategory.query.get(user_category_id)
     if not category:
         return {"error": "Category does not exist."}, 404
     # Retrieve the category details
@@ -69,12 +69,12 @@ def update_category(id):
     return jsonify(user_category_schema.dump(category)), 201  
 
 # Delete user category
-@user_category.route("/<int:id>", methods=["DELETE"])
+@user_category.route("/<int:user_category_id>", methods=["DELETE"])
 @jwt_required()
-def delete_category(id):
+def delete_category(user_category_id):
     # Find the category in the database
     # Check to see if the category exists/return error if it does not
-    category = UserCategory.query.get(id)
+    category = UserCategory.query.get(user_category_id)
     if not category:
         return {"error": "Category does not exist."}
     # Delete the category from the database (Deletes all associated activities/icons - cascade="all, delete-orphan)

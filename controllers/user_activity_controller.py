@@ -45,7 +45,7 @@ def new_activity(user_category_id):
 # Update a specific user activity name
 @user_activity.route("/<int:user_category_id>/<int:activity_id>", methods=["PUT"])
 @jwt_required()
-def update_book(user_category_id, activity_id):
+def update_activity(user_category_id, activity_id):
     # Rename category ID from route
     category = user_category_id
     # Find the activity in the database. Return error if it doesn't exist
@@ -67,7 +67,7 @@ def update_book(user_category_id, activity_id):
 # Delete user activity
 @user_activity.route("/<int:activity_id>", methods=["DELETE"])
 @jwt_required()
-def delete_category(activity_id):
+def delete_activity(activity_id):
     # Find the activity by id
     # Display error if activity is not found
     activity = UserActivity.query.get(activity_id)
