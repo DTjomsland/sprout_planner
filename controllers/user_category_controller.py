@@ -30,11 +30,10 @@ def new_category():
     user = get_jwt_identity()
     # Takes in data from the POST
     category_fields = user_category_schema.load(request.json)
-    # Checks to see if the category already exists for specific user.
-    category_check = UserCategory.query.filter_by(user_id = user,user_category_name = category_fields["user_category_name"]).first()
-    # Returns an error if the category already exists for the user
+    # Check to see if the category exists for user/return error if it does 
+    category_check = UserCategory.query.filter_by(user_id = user, user_category_name = category_fields["user_category_name"]).first()
     if category_check:
-        return {"error": "A category with this name already exists."}
+        return {"error": "A category with that name already exists."}
     # Creates a new user object from entered information.
     category = UserCategory(
         user_category_name = category_fields ['user_category_name'],
@@ -53,17 +52,16 @@ def update_category(id):
     # Retrieve user information from jwt token
     user = get_jwt_identity()
     # Find the category in the database
-    category = UserCategory.query.get(id)
     # Check to see if the category exists/return error if it does not
+    category = UserCategory.query.get(id)
     if not category:
         return {"error": "Category does not exist."}, 404
-    # Retrieve the category details from teh earlier request
+    # Retrieve the category details
     category_fields = user_category_schema.load(request.json)
-    # Checks to see if the category already exists for specific user.
-    category_check = UserCategory.query.filter_by(user_id = user,user_category_name = category_fields["user_category_name"]).first()
-    # Returns an error if the category already exists for the user
+    # Checks to see if the category already exists for specific user. Error if exists.
+    category_check = UserCategory.query.filter_by(user_id = user, user_category_name = category_fields["user_category_name"]).first()
     if category_check:
-        return {"error": "A category with this name already exists."}
+        return {"error": "A category with that name already exists."}
     # Update the category name
     category.user_category_name = category_fields["user_category_name"]
     # Commit the changes to the database
@@ -74,12 +72,12 @@ def update_category(id):
 @user_category.route("/<int:id>", methods=["DELETE"])
 @jwt_required()
 def delete_category(id):
-    # Find the category by id
+    # Find the category in the database
+    # Check to see if the category exists/return error if it does not
     category = UserCategory.query.get(id)
-    # Display error if category is not found
     if not category:
         return {"error": "Category does not exist."}
-    # Delete the category from the database (Deletes all associated activities)
+    # Delete the category from the database (Deletes all associated activities/icons - cascade="all, delete-orphan)
     db.session.delete(category)
     # Save the changes in the database
     db.session.commit()

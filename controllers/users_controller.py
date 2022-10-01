@@ -18,9 +18,9 @@ def account_register():
     # Takes in data from the POST
     user_fields = user_schema.load(request.json)
     # Checks to see if the email is already in use.
-    user = Users.query.filter_by(user_email = user_fields["user_email"]).first()
+    user_check = Users.query.filter_by(user_email = user_fields["user_email"]).first()
     # Returns an error if the email is already in use.
-    if user:
+    if user_check:
         return {"error": "An account has already been created with this email address."}
     
     # Creates a new user object from entered information.
