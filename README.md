@@ -4,7 +4,7 @@ This API provides data for a simple daily planner that has an intended audience 
 
 <br>
 
----
+
 
 ### Intended Use of Account Creation Features
 
@@ -12,7 +12,7 @@ This API provides data for a simple daily planner that has an intended audience 
 
 <br>
 
----
+
 
 ### Intended Use of Category Creation and Editing Features
 
@@ -20,7 +20,7 @@ This API provides data for a simple daily planner that has an intended audience 
 
 <br>
 
----
+
 
 ### Intended Use of Category Creation and Editing Features
 
@@ -28,7 +28,7 @@ This API provides data for a simple daily planner that has an intended audience 
 
 <br>
 
----
+
 
 ### Intended Use of the Data Overall
 
