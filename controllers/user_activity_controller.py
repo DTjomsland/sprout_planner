@@ -7,18 +7,19 @@ from schemas.user_activity_schema import user_activity_schema, user_activities_s
 # Default route for all user activity requests
 user_activity = Blueprint('user_activity', __name__, url_prefix='/useractivity')
 
-# Get request for user activities based on category
+
+# Get request for user activities based on category (Cateogires are attached to users)
 @user_activity.route('/<int:user_category_id>', methods=['GET'])
 def get_user_activities(user_category_id):
     # Search for all instances in the activity table where a row contains the category_id
     # Filter results so only ids/activity names are returned
     user_activities = db.session.query(UserActivity).with_entities(UserActivity.user_activity_id, UserActivity.user_activity_name).filter(UserActivity.user_category_id == user_category_id)
-    # Returns jsonified activities for the specific user
+    # Returns jsonified activities for the specific category
     result = user_activities_schema.dump(user_activities)
     return jsonify(result)
 
+
 # Post a new activity into the user activity table using associated category 
-# Categories are attached to user ids so only activities for the user will be shown
 @user_activity.route('/<int:user_category_id>/create', methods=['POST'])
 @jwt_required()
 def new_activity(user_category_id):
@@ -30,7 +31,7 @@ def new_activity(user_category_id):
     activity_check = UserActivity.query.filter_by(user_category_id = category, user_activity_name = activity_fields["user_activity_name"]).first()
     if activity_check:
         return {"error": "An activity with that name already exists."}
-    # Creates a new user object from entered information.
+    # Creates a new activity object from entered information.
     activity = UserActivity(
         user_activity_name = activity_fields ['user_activity_name'],
         user_category_id = category
@@ -41,13 +42,13 @@ def new_activity(user_category_id):
     db.session.commit()
     return jsonify((user_activity_schema).dump(activity))
 
+# Update a specific user activity name
 @user_activity.route("/<int:user_category_id>/<int:activity_id>", methods=["PUT"])
 @jwt_required()
 def update_book(user_category_id, activity_id):
     # Rename category ID from route
     category = user_category_id
-    # Find the activity in the database
-    # Check to see if the activity exists/return error if it does not
+    # Find the activity in the database. Return error if it doesn't exist
     activity = UserActivity.query.get(activity_id)
     if not activity:
         return {"error": "Activity does no exist."}, 404

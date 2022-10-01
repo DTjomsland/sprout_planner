@@ -13,3 +13,7 @@ class Users(db.Model):
         "UserCategory",
         backref= "user",
     )
+    feelings = db.relationship(
+        "UserFeeling",
+        backref= "user",
+    )
