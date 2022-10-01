@@ -63,7 +63,7 @@ Required data example:
 ```
 {
     "user_name":"Frank",
-    "user_email":"Frank@gmail",
+    "user_email":"Frank@gmail.com",
     "user_password":"password"
 }
 ```
@@ -74,10 +74,94 @@ Expected Response Example:
     "token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJmcmVzaCI6ZmFsc2UsImlhdCI6MTY2NDYzMTQ1MCwianRpIjoiM2QzMjY1YjItZTZjMC00NTAxLTg3OTgtZjlhNmM0MDNjOTJlIiwidHlwZSI6ImFjY2VzcyIsInN1YiI6IjMiLCJuYmYiOjE2NjQ2MzE0NTAsImV4cCI6MTY2NzIyMzQ1MH0.d93JLAINPCfSHTIEiInlkTD6nt3PrZVUlbrEGr3tTio"
 }
 ```
+---
+<br>
 
+### <strong>Endpoint: </strong>/user/login
+HTTP request verb: POST
 
+Required data example:
+
+```
+{
+    "user_email":"Frank@gmail.com",
+    "user_password":"password"
+}
+```
+Expected Response Example:
+
+```
+{
+    "user": "Frank",
+    "token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJmcmVzaCI6ZmFsc2UsImlhdCI6MTY2NDYzMTk1MCwianRpIjoiOTk3MjBjODEtZTU2Zi00ZmRkLTlkZGUtYzliMjczNjU1ZmM5IiwidHlwZSI6ImFjY2VzcyIsInN1YiI6IjMiLCJuYmYiOjE2NjQ2MzE5NTAsImV4cCI6MTY2NDcxODM1MH0.cBWn3D73NB0S4fdtvbuNP55LoOF0Xm2ZNNicPq1OP0s"
+}
+```
+---
 
 <br>
+
+### <strong>Endpoint: </strong>/usercategory/create
+
+HTTP request verb: POST
+
+Required data example:
+
+```
+{
+    "user_category_name": "Work"
+}
+```
+Expected Response Example 1 (If the user hasn't created that category yet):
+
+
+```
+{
+    "user_category_name": "Work",
+    "activities": [],
+    "user_category_id": 7,
+    "user_id": 1
+}
+```
+Expected Response Example 2 (If the user has created that category already):
+
+
+---
+<br>
+
+### <strong>Endpoint: </strong>/usercategory
+
+HTTP request verb: GET
+
+
+
+Expected Response Example:
+```
+[
+    {
+        "user_category_name": "Activity",
+        "user_category_id": 1
+    },
+    {
+        "user_category_name": "Exercise",
+        "user_category_id": 2
+    },
+    {
+        "user_category_name": "Meal",
+        "user_category_id": 3
+    }
+]
+```
+
+
+
+
+
+
+
+
+
+
+
 
 ## Entity Relationship Diagram for the API
 ![image](images/sprouterd.PNG)
