@@ -1,5 +1,4 @@
 from main import db
-from flask import jsonify, request
 
 
 class UserActivity(db.Model):
@@ -17,4 +16,3 @@ class UserActivity(db.Model):
         # Ensure the children of the category are deleted when the activity is.
         cascade="all, delete-orphan"
     )
-

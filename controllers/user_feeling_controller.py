@@ -21,6 +21,7 @@ def get_user_feelings():
     result = user_feelings_schema.dump(feelings)
     return jsonify(result)
 
+
 # Create user feeling
 @user_feeling.route('/create', methods=['POST'])
 # Requires token
@@ -46,14 +47,14 @@ def new_feeling():
     return jsonify((user_feeling_schema).dump(feeling))
 
 
-@user_feeling.route("/<int:id>", methods=["PUT"])
+@user_feeling.route("/<int:feeling_id>", methods=["PUT"])
 @jwt_required()
-def update_feeling(id):
+def update_feeling(user_feeling_id):
     # Retrieve user information from jwt token
     user = get_jwt_identity()
     # Find the feeling in the database
     # Check to see if the feeling exists/return error if it does not
-    feeling = UserFeeling.query.get(id)
+    feeling = UserFeeling.query.get(user_feeling_id)
     if not feeling:
         return {"error": "Feeling does not exist."}, 404
     # Retrieve the feeling details
@@ -69,12 +70,12 @@ def update_feeling(id):
     return jsonify(user_feeling_schema.dump(feeling)), 201  
 
 # Delete user feeling
-@user_feeling.route("/<int:id>", methods=["DELETE"])
+@user_feeling.route("/<int:user_feeling_id>", methods=["DELETE"])
 @jwt_required()
-def delete_feeling(id):
+def delete_feeling(user_feeling_id):
     # Find the feeling in the database
     # Check to see if the feeling exists/return error if it does not
-    feeling = UserFeeling.query.get(id)
+    feeling = UserFeeling.query.get(user_feeling_id)
     if not feeling:
         return {"error": "Feeling does not exist."}
     # Delete the feeling from the database (Deletes all associated feelings/icons - cascade="all, delete-orphan)

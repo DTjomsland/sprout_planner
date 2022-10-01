@@ -2,7 +2,7 @@ from controllers.users_controller import users
 from controllers.user_activity_controller import user_activity
 from controllers.user_category_controller import user_category
 from controllers.user_icon_controller import user_icon
-from controllers.user_feeling_icon_controller import user_feeling_icon
 from controllers.user_feeling_controller import user_feeling
+from controllers.user_feeling_icon_controller import user_feeling_icon
 
 registerable_controllers = [users, user_activity, user_category, user_icon, user_feeling, user_feeling_icon]
