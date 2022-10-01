@@ -4,39 +4,49 @@ This API provides data for a simple daily planner that has an intended audience 
 
 <br>
 
-### Intended Use of Account Creation Features
 ---
+
+### Intended Use of Account Creation Features
+
 ![image](images/sproutimg.PNG)
 
 <br>
 
-### Intended Use of Category Creation and Editing Features
 ---
+
+### Intended Use of Category Creation and Editing Features
+
 ![image](images/sproutimg3.PNG)
 
 <br>
 
-### Intended Use of Category Creation and Editing Features
 ---
+
+### Intended Use of Category Creation and Editing Features
+
 ![image](images/sproutimg4.PNG)
 
 <br>
 
-### Intended Use of the Data Overall
 ---
+
+### Intended Use of the Data Overall
+
 ![image](images/sproutimg2.PNG)
 
 <br>
 
+---
 
 ## Identification of the problem
----
 The problem I am trying to solve with this application is the lack of a means for some with special needs/disabilities to communicate their feelings and how they want their day to be structured. During my time as a high school special needs teacher and  as a support worker, I've worked with countless individuals that are unable to communicate through speech, often needing visual help to communicate.  This application intends to provide a way for those who are unable to communicate verbally to gain autonomy by providing them a way to communicate their feelings, as well sa the structure of their day.
 
 <br>
 
-## Why it needs to be solved
 ---
+
+## Why it needs to be solved
+
 This problem needs to be solved because far too many individuals are unable to communicate their feelings and wants verbally. After my time in the disabilities sector, I've noticed many individuals with disabilities are often times coasting through their days, doing what others want them to do because they are unable to communicate what they want and feel. This often leads to frustration and a feeling of helplessness. Everyone deserves a voice, and this API intends on facilitating that.
 
 <br>
@@ -51,8 +61,9 @@ This problem needs to be solved because far too many individuals are unable to c
 
 <br>
 
-## API Endpoints
 ---
+## API Endpoints
+
 
 <br>
 
@@ -104,6 +115,8 @@ Expected Response Example:
 
 HTTP request verb: POST
 
+Authentication Requirement: User Token
+
 Required data example:
 
 ```
@@ -112,7 +125,6 @@ Required data example:
 }
 ```
 Expected Response Example 1 (If the user hasn't created that category yet):
-
 
 ```
 {
@@ -124,15 +136,20 @@ Expected Response Example 1 (If the user hasn't created that category yet):
 ```
 Expected Response Example 2 (If the user has created that category already):
 
-
+```
+{
+    "error": "A category with that name already exists."
+}
+```
 ---
+
 <br>
 
 ### <strong>Endpoint: </strong>/usercategory
 
 HTTP request verb: GET
 
-
+Authentication Requirement: User Token
 
 Expected Response Example:
 ```
@@ -151,6 +168,9 @@ Expected Response Example:
     }
 ]
 ```
+
+
+
 
 
 
