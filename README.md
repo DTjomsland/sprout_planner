@@ -51,16 +51,11 @@ This problem needs to be solved because far too many individuals are unable to c
 
 <br>
 
-- Endpoint documentation should include
-    - HTTP request verb
-    - Required data where applicable
-    - Expected response data
-    - Authentication methods where applicable
+## Entity Relationship Diagram for the API
+![image](images/sprouterd.PNG)
+
 
 <br>
-
-<br>
-
 
 ## API Endpoints
 
@@ -610,5 +605,3 @@ Expected Response Two (If feeling icon doesn't exist):
 ---
 
 
-## Entity Relationship Diagram for the API
-![image](images/sprouterd.PNG)
