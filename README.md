@@ -51,6 +51,14 @@ This problem needs to be solved because far too many individuals are unable to c
 
 <br>
 
+## Chosen Database System
+
+The database system used for this API is PostgreSQL.  PostgreSQL is an open source object-relational database system that utilizes the SQL language.  I chose PostgreSQL due to it's track record  of being scalable, secure, and ensuring data integrity. PostgreSQL is also beginner friendly. Since this is my first API, that played a large role in choosing it. 
+
+Despite the benefits, their are some drawbacks to choosing PostgreSQL.  In regards to performance, PostgreSQL is slower than competitors such as MySQL. PostgreSQL places compatibility at the top of it's list, so changes for improvements in speed are more involved than its competitors. Overall, I found PostgreSQL easy to work with despite being rather green in the API world.
+
+
+
 ## Entity Relationship Diagram for the API
 ![image](images/sprouterd.PNG)
 
