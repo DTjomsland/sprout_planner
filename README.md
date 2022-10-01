@@ -124,7 +124,7 @@ Required data example:
     "user_category_name": "Work"
 }
 ```
-Expected Response Example 1 (If the user hasn't created that category yet):
+Expected Response Example One (If the user hasn't created that category yet):
 
 ```
 {
@@ -134,7 +134,7 @@ Expected Response Example 1 (If the user hasn't created that category yet):
     "user_id": 1
 }
 ```
-Expected Response Example 2 (If the user has created that category already):
+Expected Response Example Two (If the user has created that category already):
 
 ```
 {
@@ -184,7 +184,7 @@ Required data example:
     "user_category_name": "Free Time"
 }
 ```
-Expected Response Example 1 (If the user hasn't used that category name yet):
+Expected Response Example One (If the user hasn't used that category name yet):
 
 ```
 {
@@ -194,7 +194,7 @@ Expected Response Example 1 (If the user hasn't used that category name yet):
     "user_id": 1
 }
 ```
-Expected Response Example 2 (If the user has used that category name already):
+Expected Response Example Two (If the user has used that category name already):
 
 ```
 {
@@ -210,7 +210,7 @@ HTTP request verb: DELETE
 
 Authentication Requirement: User Token
 
-Expected Response Example 1 (If user category exists):
+Expected Response Example One (If user category exists):
 
 ```
 {
@@ -218,7 +218,7 @@ Expected Response Example 1 (If user category exists):
 }
 ```
 
-Expected Response Example 2 (If user category doesn't exist):
+Expected Response Example Two (If user category doesn't exist):
 
 ```
 {
@@ -243,7 +243,7 @@ Required data example:
 }
 ```
 
-Expected Response Example 1 (If the user hasn't used that activity name yet):
+Expected Response Example One (If the user hasn't used that activity name yet):
 
 ```
 {
@@ -254,7 +254,7 @@ Expected Response Example 1 (If the user hasn't used that activity name yet):
 }
 ```
 
-Expected Response Example 2 (If the user has used that activity name already):
+Expected Response Example Two (If the user has used that activity name already):
 
 ```
 {
@@ -326,7 +326,7 @@ HTTP request verb: DELETE
 
 Authentication Requirement: User Token
 
-Expected Response 1 (If user activity exists):
+Expected Response One (If user activity exists):
 
 ```
 {
@@ -334,7 +334,7 @@ Expected Response 1 (If user activity exists):
 }
 ```
 
-Expected Response 2 (If user activity doesn't exist):
+Expected Response Two (If user activity doesn't exist):
 
 ```
 {
@@ -353,7 +353,7 @@ Required data example (image upload):
 
 ![image](images/uploadinput.PNG)
 
-Expected Response Example 1 (If the activity did not have an associated image):
+Expected Response Example One (If the activity did not have an associated image):
 
 ```
 {
@@ -362,7 +362,7 @@ Expected Response Example 1 (If the activity did not have an associated image):
 }
 ```
 
-Expected Response Example 2 (If the activity did have an associated image):
+Expected Response Example Two (If the activity did have an associated image):
 
 ```
 {
@@ -396,7 +396,7 @@ HTTP request verb: DELETE
 
 Authentication Requirement: User Token
 
-Expected Response 1 (If user icon exists):
+Expected Response One (If user icon exists):
 
 ```
 {
@@ -404,7 +404,7 @@ Expected Response 1 (If user icon exists):
 }
 ```
 
-Expected Response 2 (If user icon doesn't exist):
+Expected Response Two (If user icon doesn't exist):
 
 ```
 {
