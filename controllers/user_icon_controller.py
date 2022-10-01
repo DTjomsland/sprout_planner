@@ -1,5 +1,5 @@
 import os
-from flask import Blueprint, jsonify, request, Flask, render_template, current_app
+from flask import Blueprint, jsonify, request, current_app
 from main import db
 from models.user_icon import UserIcon
 from flask_jwt_extended import jwt_required
@@ -10,23 +10,17 @@ import cloudinary.api
 from dotenv import load_dotenv
 from flask_cors import cross_origin
 from flask import jsonify
-from flask import Flask,render_template, request
 load_dotenv()
-
-
-
-
 
 
 # Default route for all user icon requests
 user_icon = Blueprint('user_icon', __name__, url_prefix='/usericon')
 
 # Get request for user icon linked with a specific activity
-
 @user_icon.route('/<int:user_activity_id>', methods=['GET'])
 def get_user_icons(user_activity_id):
-    user_icons = db.session.query(UserIcon).with_entities(UserIcon.user_icon_url).filter(UserIcon.user_activity_id == user_activity_id)
-    result = user_icons_schema.dump(user_icons)
+    icons = db.session.query(UserIcon).with_entities(UserIcon.user_icon_id, UserIcon.user_icon_url).filter(UserIcon.user_activity_id == user_activity_id)
+    result = user_icons_schema.dump(icons)
     return jsonify(result)
 
 @user_icon.route("/<int:user_activity_id>/upload", methods=['POST'])

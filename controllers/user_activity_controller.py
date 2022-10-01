@@ -10,7 +10,7 @@ user_activity = Blueprint('user_activity', __name__, url_prefix='/useractivity')
 # Get request for all user activities
 @user_activity.route('/<int:user_category_id>', methods=['GET'])
 def get_user_activities(user_category_id):
-    user_activities = db.session.query(UserActivity).with_entities(UserActivity.user_activity_name).filter(UserActivity.user_category_id == user_category_id)
+    user_activities = db.session.query(UserActivity).with_entities(UserActivity.user_activity_id, UserActivity.user_activity_name).filter(UserActivity.user_category_id == user_category_id)
     result = user_activities_schema.dump(user_activities)
     return jsonify(result)
 

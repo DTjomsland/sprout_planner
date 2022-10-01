@@ -1,12 +1,10 @@
 from flask import Blueprint, jsonify, request, abort
-from main import db, bcrypt, ma
+from main import db, bcrypt
 from models.users import Users
-from models.user_activity import UserActivity
 from flask_jwt_extended import  create_access_token
 from datetime import timedelta
-from schemas.users_schema import user_schema, users_schema
-from schemas.user_activity_schema import UserActivitySchema
-from sqlalchemy import select, join
+from schemas.users_schema import user_schema
+
 
 
 # Default route for all users requests
