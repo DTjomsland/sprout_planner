@@ -109,19 +109,19 @@ This application utilizes Cloudinary for its image uploading and storage. In the
 ## Project Model Relations
 ### User:
 - Every user is identified by the primary key: user_id
-- Every user has a 1-to-many relationship with The UserCategory and UserFeelingTable. Every User can create many user categories and user feelings.
+- Every user has a one-to-many relationship with The UserCategory and UserFeelingTable. Every User can create many user categories and user feelings.
 - UserCategory and UserFeeling contain  the foreign key: user_id. 
 - User categories and user feelings only have one user linked to them.
 
 ### UserCategory:
 - Every user category is identified by the primary key: user_category_id.
-- Every user category has a 1-to-many relationship with the UserActivity table. Every category can be linked to many user activities.
+- Every user category has a one-to-many relationship with the UserActivity table. Every category can be linked to many user activities.
 - UserActivity contains the foreign key: user_category_id.
 - User activities can only have one category linked to them. Since each category can only have one user, each activity is only linked to one user.
 
 ### UserActivity:
 - Every user activity is identified by the primary key: user_activity_id.
-- Every user activity has a 1-to-1 relationship with the UserIcon table. Every activity can be linked to only one user icon.
+- Every user activity has a one-to-one relationship with the UserIcon table. Every activity can be linked to only one user icon.
 - UserIcon contains the foreign key: user_activity_id.
 - User icons can only have one user activity linked to them. Since each activity can only be linked to one category, and each category can only be linked to one user, each icon is only linked to one user.
 
@@ -132,7 +132,7 @@ This application utilizes Cloudinary for its image uploading and storage. In the
 
 ### UserFeeling:
 - Every user feeling is identified by the primary key: user_feeling_id.
-- Every user feeling has a 1-to-1 relationship with the UserFeelingIcon table. Every activity can be linked to only one user icon.
+- Every user feeling has a one-to-one relationship with the UserFeelingIcon table. Every activity can be linked to only one user icon.
 - UserFeelingIcon contains the foreign key: user_feeling_id.
 - User feeling icons can only have one user feeling linked to them. Since each feeling  can only be linked to one user, each user feeling icon is only linked to one user.
 
@@ -144,17 +144,33 @@ This application utilizes Cloudinary for its image uploading and storage. In the
 <br>
 
 ## Discuss the database relations to be implemented in your application
+*Relations are available visually in the ERD section above.*
 
-### Relations:
+### Relationships:
 - <strong> User and UserCategory:</strong>
 
-    The relationship between User and UserCategory is a 1-to-many-relationship. This means that each user can make many categories, but each category can only have one user associated with it. Users create categories to help structure their user activities in a user-friendly way.
+    The relationship between User and UserCategory is a one-to-many-relationship. This means that each user can make many categories, but each category can only have one user associated with it. This is achieved by using the primary key from User as a foreign key in UserCategory. Users are able to see, modify, and delete only the categories that they have created. Users are meant to create categories to help structure their user activities in a user-friendly way.
+
+<br>
 
 - <strong>UserCategory and UserActivity:</strong>
-- <strong>UserActivity and UserIcon:</strong>
-- <strong>User and UserFeeling:</strong>
-- <strong>UserFeeling and UserFeelingIcon:</strong>
 
+    The relationship between UserCategory and UserActivity is a one-to-many relationship. This means that each category can contain many activities, but each activity can only have one parent category. This is achieved by using the primary key from UserCategory as a foreign key in UserActivity. Since each category is only attached to one user and each activity is only attached to one category, that means that each activity is only attached to one user as well. If a category is deleted by a user, all associated activities will be deleted as well.
+
+<br>
+
+- <strong>UserActivity and UserIcon:</strong>
+
+    The relationship between UserActivity and UserIcon is a one-to-one relationship.  This means that each activity is associated with one just one icon, and the same is true for the reverse. This is achieved by using the primary key in UserActivity as the foreign key in UserIcon.  Since each icon is only attached to one activity, which is only attached to one category, which is only attached to one user,  each icon is only attached to one user.  If any of the user icons parents are deleted by the user, the user icon will be deleted as well. 
+    
+<br>
+
+- <strong>User and UserFeeling:</strong>
+     The relationship between User and UserFeeling is a one-to-many-relationship. This means that each user can make many feelings, but each feeling can only have one user associated with it. This is achieved by using the primary key from User as a foreign key in UserFeeling. Users are able to see, modify, and delete only the feelings that they have created. 
+<br>
+
+- <strong>UserFeeling and UserFeelingIcon:</strong>
+    The relationship between UserFeeling and UserFeelingIcon is a one-to-one relationship.  This means that each feeling is associated with one just one feeling icon, and the same is true for the reverse. This is achieved by using the primary key in UserFeeling as the foreign key in UserFeelingIcon.  Since each feeling icon is only attached to one feeling, which is only attached to one user, each feeling icon is only attached to one user. If the feeling associated with a feeling icon is deleted, the feeling icon will be deleted as well.
 
 
 
