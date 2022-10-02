@@ -6,6 +6,7 @@ from schemas.user_activity_schema import UserActivitySchema
 class UserCategorySchema(ma.Schema):
     class Meta:
         fields = ['user_category_id', 'user_category_name', 'user_id', 'activities']
+        load_only = ['activities']
     activities = fields.List(fields.Nested(UserActivitySchema))
 # single user category schema
 user_category_schema = UserCategorySchema()

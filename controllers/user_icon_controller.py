@@ -35,7 +35,7 @@ def upload_file(user_activity_id):
     # Rename router variable
     activity = user_activity_id
     # Check to see if the activity has an image.  Return error if it does. (Shouldn't be prompted more than once in actual app.  For test use only)
-    image_check = UserIcon.query.filter_by(user_activity_id = activity ).first()
+    image_check = UserIcon.query.filter_by(user_activity_id = activity).first()
     if image_check:
         return {"error": "An image is already associated with this activity."}
 

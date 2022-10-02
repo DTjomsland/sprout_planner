@@ -6,4 +6,4 @@ class UserIcon(db.Model):
     # User icon columns
     user_icon_id = db.Column(db.Integer, primary_key=True)
     user_icon_url = db.Column(db.String)
-    user_activity_id = db.Column(db.Integer, db.ForeignKey("user_activity.user_activity_id"), unique=True)
+    user_activity_id = db.Column(db.Integer, db.ForeignKey("user_activity.user_activity_id"), nullable=False, unique=True)

@@ -243,7 +243,6 @@ Expected Response Example One (If the user hasn't created that category yet):
 ```
 {
     "user_category_name": "Work",
-    "activities": [],
     "user_category_id": 7,
     "user_id": 1
 }
@@ -303,7 +302,6 @@ Expected Response Example One (If the user hasn't used that category name yet):
 ```
 {
     "user_category_name": "Free Time",
-    "activities": [],
     "user_category_id": 1,
     "user_id": 1
 }
@@ -362,7 +360,6 @@ Expected Response Example One (If the user hasn't used that activity name yet):
 ```
 {
     "user_activity_id": 9,
-    "icons": null,
     "user_activity_name": "Swimming",
     "user_category_id": 3
 }
@@ -422,7 +419,6 @@ Expected Response Example 1 (If the user hasn't used that activity name yet):
     "user_activity_name": "Jogging",
     "user_activity_id": 9,
     "user_category_id": 3,
-    "icons": null
 }
 ```
 Expected Response Example 2 (If the user has used that category name already):
@@ -550,7 +546,6 @@ Expected Response Example One (If the user hasn't created that feeling yet):
 
 ```
 {
-    "feeling_icon": [],
     "user_id": 1,
     "user_feeling_id": 8,
     "user_feeling_name": "Frustrated"
@@ -611,7 +606,6 @@ Expected Response Example One (If the user hasn't used that feeling name yet):
 ```
 {
     "user_id": 1,
-    "feeling_icon": [],
     "user_feeling_name": "Excited",
     "user_feeling_id": 8
 }
