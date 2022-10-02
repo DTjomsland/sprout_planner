@@ -67,6 +67,7 @@ Trello Task:
 ![image](images/routechecklist.PNG)
 
 <br>
+
 ## Chosen Database System
 
 The database system used for this API is PostgreSQL.  PostgreSQL is an open source object-relational database system that utilizes the SQL language.  I chose PostgreSQL due to it's track record  of being scalable, secure, and ensuring data integrity. PostgreSQL is also beginner friendly. Since this is my first API, that played a large role in choosing it. 
