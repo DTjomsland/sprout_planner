@@ -38,14 +38,14 @@ This API provides data for a simple daily planner that has an intended audience 
 
 
 
-## Identification of the problem
+## Identification of the Problem
 The problem I am trying to solve with this application is the lack of a means for some with special needs/disabilities to communicate their feelings and how they want their day to be structured. During my time as a high school special needs teacher and  as a support worker, I've worked with countless individuals that are unable to communicate through speech, often needing visual help to communicate.  This application intends to provide a way for those who are unable to communicate verbally to gain autonomy by providing them a way to communicate their feelings, as well as the structure of their day.
 
 <br>
 
 
 
-## Why it needs to be solved
+## Why It Needs to be Solved
 
 This problem needs to be solved because far too many individuals are unable to communicate their feelings and wants verbally. After my time in the disabilities sector, I've noticed many individuals with disabilities are often times coasting through their days, doing what others want them to do because they are unable to communicate what they want and feel. This often leads to frustration and a feeling of helplessness. Everyone deserves a voice, and this API intends on facilitating that.
 
@@ -57,11 +57,89 @@ The database system used for this API is PostgreSQL.  PostgreSQL is an open sour
 
 Despite the benefits, their are some drawbacks to choosing PostgreSQL.  In regards to performance, PostgreSQL is slower than competitors such as MySQL. PostgreSQL places compatibility at the top of it's list, so changes for improvements in speed are more involved than its competitors. Overall, I found PostgreSQL easy to work with despite being rather green in the API world.
 
+<br>
+
+## Third Party Services:
+### Cloudinary
+This application utilizes Cloudinary for its image uploading and storage. In the routes `/usericon/\<int:user_activity_id>/upload` and `/userfeelingicon/\<int:user_feeling_id>/upload`, the Cloudinary Upload API is called which is configured with a full set of my user credentials which are stored safely in the .env file. The Cloudinary Upload API allows for the user to upload images to Cloudinary which returns information regarding the upload.  In this case, the URL is taken from the returned information and is used to create a new row in the UserIcon and UserFeelingIcon tables. 
+
+### Flask Packages
+- alembic==1.7.7
+- bcrypt==4.0.0
+- certifi==2022.9.24
+- click==8.0.4
+- cloudinary==1.30.0
+- dataclasses==0.8
+- Flask==2.0.3
+- Flask-Bcrypt==1.0.1
+- Flask-Cors==3.0.10
+- Flask-JWT-Extended==4.4.2
+- flask-marshmallow==0.14.0
+- Flask-SQLAlchemy==2.5.1
+- greenlet==1.1.3
+- importlib-metadata==4.8.3
+- importlib-resources==5.4.0
+- itsdangerous==2.0.1
+- Jinja2==3.0.3
+- Mako==1.1.6
+- MarkupSafe==2.0.1
+- marshmallow==3.14.1
+- marshmallow-sqlalchemy==0.27.0
+- pkg_resources==0.0.0
+- psycopg2==2.9.3
+- psycopg2-binary==2.9.3
+- PyJWT==2.4.0
+- python-dotenv==0.20.0
+- semantic-version==2.10.0
+- setuptools-rust==1.1.2
+- six==1.16.0
+- SQLAlchemy==1.4.41
+- typing_extensions==4.1.1
+- urllib3==1.26.12
+- Werkzeug==2.0.3
+- zipp==3.6.0
 
 <br>
 
 ## Entity Relationship Diagram for the API
 ![image](images/sprouterd.PNG)
+
+<br>
+
+## Project Model Relations
+### User:
+- Every user is identified by the primary key: user_id
+- Every user has a 1-to-many relationship with The UserCategory and UserFeelingTable. Every User can create many user categories and user feelings.
+- UserCategory and UserFeeling contain  the foreign key: user_id. 
+- User categories and user feelings only have one user linked to them.
+
+### UserCategory:
+- Every user category is identified by the primary key: user_category_id.
+- Every user category has a 1-to-many relationship with the UserActivity table. Every category can be linked to many user activities.
+- UserActivity contains the foreign key: user_category_id.
+- User activities can only have one category linked to them. Since each category can only have one user, each activity is only linked to one user.
+
+### UserActivity:
+- Every user activity is identified by the primary key: user_activity_id.
+- Every user activity has a 1-to-1 relationship with the UserIcon table. Every activity can be linked to only one user icon.
+- UserIcon contains the foreign key: user_activity_id.
+- User icons can only have one user activity linked to them. Since each activity can only be linked to one category, and each category can only be linked to one user, each icon is only linked to one user.
+
+### UserIcon:
+- Every user icon is identified by the primary key: user_icon_id.
+- The primary key for user icons is not featured in any other tables.
+- UserIcon contains the foreign key: user_activity_id.
+
+### UserFeeling:
+- Every user feeling is identified by the primary key: user_feeling_id.
+- Every user feeling has a 1-to-1 relationship with the UserFeelingIcon table. Every activity can be linked to only one user icon.
+- UserFeelingIcon contains the foreign key: user_feeling_id.
+- User feeling icons can only have one user feeling linked to them. Since each feeling  can only be linked to one user, each user feeling icon is only linked to one user.
+
+### UserFeelingIcon:
+- Every user feeling icon is identified by the primary key: user_feeling_icon_id.
+- The primary key for user feeling icons is not featured in any other tables.
+- UserIcon contains the foreign key: user_feeling_id.
 
 
 <br>

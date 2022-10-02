@@ -15,6 +15,8 @@ load_dotenv()
 
 # Default route for all user icon requests
 user_icon = Blueprint('user_icon', __name__, url_prefix='/usericon')
+
+
 # Get request for user icon linked with a specific activity
 @user_icon.route('/<int:user_activity_id>', methods=['GET'])
 def get_user_icons(user_activity_id):
