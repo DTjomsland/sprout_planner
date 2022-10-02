@@ -127,7 +127,7 @@ This application utilizes Cloudinary for its image uploading and storage. In the
 
 ### UserIcon:
 - Every user icon is identified by the primary key: user_icon_id.
-- The primary key for user icons is not featured in any other tables.
+- The primary key for UserIcons is not featured in any other tables.
 - UserIcon contains the foreign key: user_activity_id.
 
 ### UserFeeling:
@@ -138,8 +138,24 @@ This application utilizes Cloudinary for its image uploading and storage. In the
 
 ### UserFeelingIcon:
 - Every user feeling icon is identified by the primary key: user_feeling_icon_id.
-- The primary key for user feeling icons is not featured in any other tables.
+- The primary key for UserFeelingIcon is not featured in any other tables.
 - UserIcon contains the foreign key: user_feeling_id.
+
+<br>
+
+## Discuss the database relations to be implemented in your application
+
+### Relations:
+- <strong> User and UserCategory:</strong>
+
+    The relationship between User and UserCategory is a 1-to-many-relationship. This means that each user can make many categories, but each category can only have one user associated with it. Users create categories to help structure their user activities in a user-friendly way.
+
+- <strong>UserCategory and UserActivity:</strong>
+- <strong>UserActivity and UserIcon:</strong>
+- <strong>User and UserFeeling:</strong>
+- <strong>UserFeeling and UserFeelingIcon:</strong>
+
+
 
 
 <br>
