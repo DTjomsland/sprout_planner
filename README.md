@@ -70,14 +70,16 @@ Task allocation and tracking were done through the use of the online tool Trello
 
 ## Chosen Database System
 
-The database system used for this API is PostgreSQL.  PostgreSQL is an open source object-relational database system that utilizes the SQL language.  I chose PostgreSQL due to it's track record  of being scalable, secure, and ensuring data integrity. PostgreSQL is also beginner friendly. Since this is my first API, that played a large role in choosing it. 
+The database system used for this API is PostgreSQL.  PostgreSQL is an open source object-relational database system that utilizes the SQL language.  I chose PostgreSQL due to it's track record of being scalable, reliable, secure, and ensuring data integrity. It's been in development for over 30 years. In this time, many companies and professionals have contributed to the project, so its current state is the culmination of 25 years of innovation driven by those that actively use it. PostgreSQL is also free to use, which saved any costs that I may have faced using other projects. It is also beginner friendly once it is set up. Since this is my first API, its ease-of-use played a large role in choosing it. 
 
-Despite the benefits, there are some drawbacks to choosing PostgreSQL.  In regards to performance, PostgreSQL is slower than competitors such as MySQL. PostgreSQL places compatibility at the top of it's list, so changes for improvements in speed are more involved than its competitors. Overall, I found PostgreSQL easy to work with despite being rather green in the API world.
+Despite the benefits, there are some drawbacks to choosing PostgreSQL.  In regards to performance, PostgreSQL is slower than competitors such as MySQL. PostgreSQL places compatibility at the top of it's list, so changes for improvements in speed are more involved than its competitors. Installation and configuration of PostgreSQL can be more difficult for beginners which could be an issue for those who aren't familiar with troubleshooting computer programs. Overall, I found PostgreSQL to be an excellent choice despite its drawbacks. I found it easy to work with despite being rather green in the API world.
 
 <br>
 
 ## Key functionalities and Benefits of an ORM
-Object-Relational-Mapping is a technique for writing queries using the object-oriented paradigm preferred by the developer. For instance, in the case of SQL, a typical query would look something like this:
+Object-Relational-Mapping is a technique for writing queries using the object-oriented paradigm preferred by the developer. It creates an object oriented layer between the  layer between the programmer and the database that removes the need to write SQL queries. 
+
+For instance, in the case of SQL, a typical query would look something like this:
 
 ```
 SELECT customers.id 
@@ -94,6 +96,16 @@ Object-relational-mappers allow for this same query to be created using the pref
 result = session.query(Customers).all()
 ```
 
+<br>
+
+### Key Functionalities Summarized:
+- Utilize libraries to generate objects and map them to the database.
+- Allow for the retrieval and manipulation of data with the language of the coder's choice.
+- Allow quick and easy relationship building between tables in the database. 
+- Generally are not picky about which DBMS the coder is using.  It can switch between different types with little modification. 
+
+<br>
+
 ### Benefits
 - Ability to utilize the language that the developer is familiar with or already using for the project.
 - ORMs are jam packed with powerful features such as support migrations and seeding.
@@ -106,7 +118,7 @@ result = session.query(Customers).all()
 
 ## Third Party Services:
 ### Cloudinary
-This application utilizes Cloudinary for its image uploading and storage. In the routes `/usericon/\<int:user_activity_id>/upload` and `/userfeelingicon/\<int:user_feeling_id>/upload`, the Cloudinary Upload API is called which is configured with a full set of my user credentials which are stored safely in the .env file. The Cloudinary Upload API allows for the user to upload images to Cloudinary which returns information regarding the upload.  In this case, the URL is taken from the returned information and is used to create a new row in the UserIcon and UserFeelingIcon tables. 
+This application utilizes Cloudinary for its image uploading and storage. Cloudinary is a powerful API that allows for developers to manage and deliver various types of media. In this case, it will be utilized for image storage for the user activities and user feelings. In the routes `/usericon/\<int:user_activity_id>/upload` and `/userfeelingicon/\<int:user_feeling_id>/upload`, the Cloudinary Upload API is called which is configured with a full set of my user credentials which are stored safely in the .env file. The Cloudinary Upload API allows for the user to upload images to Cloudinary, which returns information regarding the upload.  In this case, the URL is taken from the returned information and is used to create a new row in the UserIcon and UserFeelingIcon tables. 
 
 ### Flask Packages
 - alembic==1.7.7
@@ -795,4 +807,18 @@ Expected Response Two (If feeling icon doesn't exist):
 ```
 ---
 
+<br>
 
+## References
+
+Advantages of PostgreSQL - CYBERTEC | Data Science & PostgreSQL. (n.d.). Cybertec. https://www.cybertec-postgresql.com/en/postgresql-overview/advantages-of-postgresql/
+
+cloudinary. (n.d.). Npm. Retrieved October 2, 2022, from https://www.npmjs.com/package/cloudinary
+
+Creating an API With Python Flask to Upload Files to Cloudinary. (2021, April 19). Cloudinary Blog. https://cloudinary.com/blog/creating_an_api_with_python_flask_to_upload_files_to_cloudinary
+
+https://flask-sqlalchemy.palletsprojects.com/en/2.x/models/
+
+ORM (Object Relational Mapping). (2016, May 23). Java Tutorials. https://javabydeveloper.com/orm-object-relational-mapping/
+
+Understanding Object-Relational Mapping: Pros, Cons, and Types. (n.d.). AltexSoft. https://www.altexsoft.com/blog/object-relational-mapping/
