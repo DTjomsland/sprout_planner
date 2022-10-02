@@ -59,6 +59,32 @@ Despite the benefits, their are some drawbacks to choosing PostgreSQL.  In regar
 
 <br>
 
+## Key functionalities and Benefits of an ORM
+Object-Relational-Mapping is a technique for writing queries using the object-oriented paradigm preferred by the developer. For instance, in the case of SQL, a typical query would look something like this:
+
+```
+SELECT customers.id 
+AS customers_id, customers.name 
+AS customers_name, customers.address 
+AS customers_address, customers.email 
+AS customers_email
+FROM customers
+```
+
+Object-relational-mappers allow for this same query to be created using the preferred language of the developer. Typically, when the word ORM is used, it is referring to the library that facilitates this technique. Below is an example of the same query from above written for a Python Flask application.
+
+```
+result = session.query(Customers).all()
+```
+
+### Benefits
+- Ability to utilize the language that the developer is familiar with or already using for the project.
+- ORMs are jam packed with powerful features such as support migrations and seeding.
+- Queries written using ORM are often perform much better than programmer written SQL statements. 
+- You can use an ORM without have much to any SQL knowledge.
+- Most importantly, it speeds up the development process which reduces development time and costs.
+<br>
+
 ## Third Party Services:
 ### Cloudinary
 This application utilizes Cloudinary for its image uploading and storage. In the routes `/usericon/\<int:user_activity_id>/upload` and `/userfeelingicon/\<int:user_feeling_id>/upload`, the Cloudinary Upload API is called which is configured with a full set of my user credentials which are stored safely in the .env file. The Cloudinary Upload API allows for the user to upload images to Cloudinary which returns information regarding the upload.  In this case, the URL is taken from the returned information and is used to create a new row in the UserIcon and UserFeelingIcon tables. 
@@ -182,9 +208,9 @@ This application utilizes Cloudinary for its image uploading and storage. In the
 <br>
 
 ### <strong>Endpoint: </strong>/user/register 
-HTTP request verb: POST
+HTTP Request Verb: POST
 
-Required data example:
+Required Data Example:
 ```
 {
     "user_name":"Frank",
@@ -203,9 +229,9 @@ Expected Response Example:
 <br>
 
 ### <strong>Endpoint: </strong>/user/login
-HTTP request verb: POST
+HTTP Request Verb: POST
 
-Required data example:
+Required Data Example:
 
 ```
 {
@@ -227,11 +253,11 @@ Expected Response Example:
 
 ### <strong>Endpoint: </strong>/usercategory/create
 
-HTTP request verb: POST
+HTTP Request Verb: POST
 
-Authentication Requirement: User Token
+Authentication Requirement: Token generated on login
 
-Required data example:
+Required Data Example:
 
 ```
 {
@@ -260,9 +286,9 @@ Expected Response Example Two (If the user has created that category already):
 
 ### <strong>Endpoint: </strong>/usercategory
 
-HTTP request verb: GET
+HTTP Request Verb: GET
 
-Authentication Requirement: User Token
+Authentication Requirement: Token generated on login
 
 Expected Response Example:
 ```
@@ -286,11 +312,11 @@ Expected Response Example:
 
 ### <strong>Endpoint: </strong>/usercategory/<int:user_category_id>
 
-HTTP request verb: PUT
+HTTP Request Verb: PUT
 
-Authentication Requirement: User Token
+Authentication Requirement: Token generated on login
 
-Required data example:
+Required Data Example:
 
 ```
 {
@@ -318,9 +344,9 @@ Expected Response Example Two (If the user has used that category name already):
 
 ### <strong>Endpoint: </strong>/usercategory/\<int:user_category_id>
 
-HTTP request verb: DELETE
+HTTP Request Verb: DELETE
 
-Authentication Requirement: User Token
+Authentication Requirement: Token generated on login
 
 Expected Response Example One (If user category exists):
 
@@ -343,11 +369,11 @@ Expected Response Example Two (If user category doesn't exist):
 
 ### <strong>Endpoint: </strong>/useractivity/\<int:user_category_id>/create
 
-HTTP request verb: POST
+HTTP Request Verb: POST
 
-Authentication Requirement: User Token
+Authentication Requirement: Token generated on login
 
-Required data example:
+Required Data Example:
 
 ```
 {
@@ -378,9 +404,9 @@ Expected Response Example Two (If the user has used that activity name already):
 
 ### <strong>Endpoint: </strong>/useractivity/\<int:user_category_id>
 
-HTTP request verb: GET
+HTTP Request Verb: GET
 
-Authentication Requirement: User Token
+Authentication Requirement: Token generated on login
 
 Expected Response Example:
 ```
@@ -401,11 +427,11 @@ Expected Response Example:
 
 ### <strong>Endpoint: </strong>/useractivity/\<int:user_category_id>/\<int:activity_id>
 
-HTTP request verb: PUT
+HTTP Request Verb: PUT
 
-Authentication Requirement: User Token
+Authentication Requirement: Token generated on login
 
-Required data example:
+Required Data Example:
 
 ```
 {
@@ -434,9 +460,9 @@ Expected Response Example 2 (If the user has used that category name already):
 
 ### <strong>Endpoint: </strong>/useractivity/\<int:user_activity_id>
 
-HTTP request verb: DELETE
+HTTP Request Verb: DELETE
 
-Authentication Requirement: User Token
+Authentication Requirement: Token generated on login
 
 Expected Response One (If user activity exists):
 
@@ -459,11 +485,11 @@ Expected Response Two (If user activity doesn't exist):
 
 ### <strong>Endpoint: </strong>/usericon/<int:user_activity_id>/upload"
 
-HTTP request verb: POST
+HTTP Request Verb: POST
 
-Authentication Requirement: User Token
+Authentication Requirement: Token generated on login
 
-Required data example (image upload):
+Required Data Example (image upload):
 
 ![image](images/uploadinput.PNG)
 
@@ -487,9 +513,9 @@ Expected Response Example Two (If the activity did have an associated image):
 
 ### <strong>Endpoint: </strong>/usericon/\<int:user_activity_id>
 
-HTTP request verb: GET
+HTTP Request Verb: GET
 
-Authentication Requirement: User Token
+Authentication Requirement: Token generated on login
 
 Expected Response Example:
 ```
@@ -506,9 +532,9 @@ Expected Response Example:
 
 ### <strong>Endpoint: </strong>/usericon/\<int:user_icon_id>
 
-HTTP request verb: DELETE
+HTTP Request Verb: DELETE
 
-Authentication Requirement: User Token
+Authentication Requirement: Token generated on login
 
 Expected Response One (If user icon exists):
 
@@ -531,11 +557,11 @@ Expected Response Two (If user icon doesn't exist):
 
 ### <strong>Endpoint: </strong>/userfeeling/create
 
-HTTP request verb: POST
+HTTP Request Verb: POST
 
-Authentication Requirement: User Token
+Authentication Requirement: Token generated on login
 
-Required data example:
+Required Data Example:
 
 ```
 {
@@ -563,9 +589,9 @@ Expected Response Example Two (If the user has created that feeling already):
 
 ### <strong>Endpoint: </strong>/userfeeling
 
-HTTP request verb: GET
+HTTP Request Verb: GET
 
-Authentication Requirement: User Token
+Authentication Requirement: Token generated on login
 
 Expected Response Example:
 ```
@@ -590,11 +616,11 @@ Expected Response Example:
 
 ### <strong>Endpoint: </strong>/userfeeling/<int:user_feeling_id>
 
-HTTP request verb: PUT
+HTTP Request Verb: PUT
 
-Authentication Requirement: User Token
+Authentication Requirement: Token generated on login
 
-Required data example:
+Required Data Example:
 
 ```
 {
@@ -623,9 +649,9 @@ Expected Response Example Two (If the user has used that feeling name already):
 
 ### <strong>Endpoint: </strong>/userfeeling/\<int:user_feeling_id>
 
-HTTP request verb: DELETE
+HTTP Request Verb: DELETE
 
-Authentication Requirement: User Token
+Authentication Requirement: Token generated on login
 
 Expected Response One (If user feeling exists):
 
@@ -647,11 +673,11 @@ Expected Response Two (If user feeling doesn't exist):
 <br>
 
 ### <strong>Endpoint: </strong>/userfeelingicon/\<int:user_feeling_id>/upload
-HTTP request verb: POST
+HTTP Request Verb: POST
 
-Authentication Requirement: User Token
+Authentication Requirement: Token generated on login
 
-Required data example (image upload):
+Required Data Example (image upload):
 
 ![image](images/uploadinput.PNG)
 
@@ -677,9 +703,9 @@ Expected Response Example Two (If the feeling did have an associated image):
 
 ### <strong>Endpoint: </strong>/userfeelingicon/\<int:user_feeling_id>
 
-HTTP request verb: GET
+HTTP Request Verb: GET
 
-Authentication Requirement: User Token
+Authentication Requirement: Token generated on login
 
 Expected Response Example:
 ```
@@ -696,9 +722,9 @@ Expected Response Example:
 
 ### <strong>Endpoint: </strong>/userfeelingicon/\<int:user_feeling_icon_id>
 
-HTTP request verb: DELETE
+HTTP Request Verb: DELETE
 
-Authentication Requirement: User Token
+Authentication Requirement: Token generated on login
 
 Expected Response One (If feeling icon exists):
 
