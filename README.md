@@ -39,7 +39,7 @@ This API provides data for a simple daily planner that has an intended audience 
 
 
 ## Identification of the Problem
-The problem I am trying to solve with this application is the lack of a means for some with special needs/disabilities to communicate their feelings and how they want their day to be structured. During my time as a high school special needs teacher and  as a support worker, I've worked with countless individuals that are unable to communicate through speech, often needing visual help to communicate.  This application intends to provide a way for those who are unable to communicate verbally to gain autonomy by providing them a way to communicate their feelings, as well as the structure of their day.
+The problem I am trying to solve with this application is the lack of a means for some with special needs/disabilities to communicate their feelings and how they want their day to be structured. During my time as a high school special needs teacher and  as a support worker, I've worked with countless individuals that are unable to communicate through speech, often needing visual aids to communicate.  This application intends to provide a way for those who are unable to communicate verbally to gain autonomy by providing them a way to communicate their feelings, as well as the structure of their day.
 
 <br>
 
@@ -47,7 +47,7 @@ The problem I am trying to solve with this application is the lack of a means fo
 
 ## Why It Needs to be Solved
 
-This problem needs to be solved because far too many individuals are unable to communicate their feelings and wants verbally. After my time in the disabilities sector, I've noticed many individuals with disabilities are often times coasting through their days, doing what others want them to do because they are unable to communicate what they want and feel. This often leads to frustration and a feeling of helplessness. Everyone deserves a voice, and this API intends on facilitating that.
+This problem needs to be solved because far too many individuals are unable to communicate their feelings and wants verbally. After my time in the disabilities sector, I've noticed many individuals with disabilities are often times coasting through their days, doing what others want them to do because they are unable to communicate what they want and feel. This often leads to frustration and a feeling of helplessness. Everyone deserves a voice, and this API intends on facilitating that.  There are a few visual planner on the market currently, but all of them are too feature rich and complicated.  Often times, they allow for the user to delete, edit, and plan their day all on one page which leads to accidental modifications.  This app intends allow whoever is assisting the user (ex: support worker/family) to enter the planner section of the app and hand it off to the user without any possibility of accidental modifications to the structure/activities. 
 
 <br>
 
@@ -152,6 +152,8 @@ This application utilizes Cloudinary for its image uploading and storage. In the
 <br>
 
 ## Project Model Relations
+*Relations are available visually in the ERD section above.*
+
 ### User:
 - Every user is identified by the primary key: user_id
 - Every user has a one-to-many relationship with The UserCategory and UserFeelingTable. Every User can create many user categories and user feelings.
@@ -188,7 +190,8 @@ This application utilizes Cloudinary for its image uploading and storage. In the
 
 <br>
 
-## Discuss the database relations to be implemented in your application
+## Discussion of the Database Relations to be Implemented 
+
 *Relations are available visually in the ERD section above.*
 
 ### Relationships:
