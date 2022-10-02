@@ -77,6 +77,7 @@ Despite the benefits, there are some drawbacks to choosing PostgreSQL.  In regar
 <br>
 
 ## Key functionalities and Benefits of an ORM
+
 Object-Relational-Mapping is a technique for writing queries using the object-oriented paradigm preferred by the developer. It creates an object oriented layer between the  layer between the programmer and the database that removes the need to write SQL queries. 
 
 For instance, in the case of SQL, a typical query would look something like this:
@@ -98,7 +99,8 @@ result = session.query(Customers).all()
 
 <br>
 
-### Key Functionalities Summarized:
+### Key Functionalities Summarized
+
 - Utilize libraries to generate objects and map them to the database.
 - Allow for the retrieval and manipulation of data with the language of the coder's choice.
 - Allow quick and easy relationship building between tables in the database. 
