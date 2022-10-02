@@ -1,5 +1,6 @@
 from main import db
 
+
 class Users(db.Model):
     __tablename__="users"
     
@@ -8,7 +9,6 @@ class Users(db.Model):
     user_name = db.Column(db.String(255))
     user_email = db.Column(db.String, unique=True)
     user_password = db.Column(db.String(60))
-    admin = db.Column(db.Boolean, default=False)
     categories = db.relationship(
         "UserCategory",
         backref= "user",
@@ -17,3 +17,4 @@ class Users(db.Model):
         "UserFeeling",
         backref= "user",
     )
+    

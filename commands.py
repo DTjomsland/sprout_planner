@@ -35,19 +35,17 @@ def seed_db():
 
     db.session.add(user1)
     db.session.commit()
-    
-    #Seeding admin
-    admin = Users(
-        user_email = "admin@gmail.com",
+
+    user2 = Users(
+        user_email = "user2@gmail.com",
         user_name = 'David',
         user_password = bcrypt.generate_password_hash("password").decode("utf-8"),
-        admin = True
     )
-    db.session.add(admin)
+    db.session.add(user2)
     db.session.commit()
 
+
     # Seeding categories
-    
     category1 = UserCategory(
         user_category_name = "Activity",
         user_id = 1,
@@ -181,6 +179,7 @@ def seed_db():
 
     db.session.commit()
 
+
     # Seeding User Icon
     feelingicon1 =  UserFeelingIcon(
         user_feeling_icon_url = 'randomurl1',
@@ -224,7 +223,7 @@ def seed_db():
     db.session.add(feelingicon5)
     db.session.commit()
 
-    db.session.commit()
+
     # Seeding User Icon
     icon1 =  UserIcon(
         user_icon_url = 'randomurl1',

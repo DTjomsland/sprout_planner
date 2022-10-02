@@ -8,6 +8,10 @@ class UserCategorySchema(ma.Schema):
         fields = ['user_category_id', 'user_category_name', 'user_id', 'activities']
         load_only = ['activities']
     activities = fields.List(fields.Nested(UserActivitySchema))
+
+    # Validations
+    user_category_name = ma.String(required=True, validate=Length(min=1))
+
 # single user category schema
 user_category_schema = UserCategorySchema()
 

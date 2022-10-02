@@ -1,6 +1,5 @@
 from main import db
 
-
 class UserActivity(db.Model):
     __tablename__="user_activity"
     

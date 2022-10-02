@@ -2,6 +2,7 @@ from flask import Blueprint, jsonify, request, abort
 from main import db
 from flask_jwt_extended import jwt_required
 from models.user_activity import UserActivity
+from marshmallow.exceptions import ValidationError
 from schemas.user_activity_schema import user_activity_schema, user_activities_schema
 
 # Default route for all user activity requests
@@ -79,3 +80,8 @@ def delete_activity(activity_id):
     db.session.commit()
     # Return message if deleted successfully
     return {"message": "Activity deleted successfully."}
+
+# Validation error messages
+@user_activity.errorhandler(ValidationError)
+def register_validation_error(error):
+    return error.messages, 400

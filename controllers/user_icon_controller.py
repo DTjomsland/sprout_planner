@@ -49,7 +49,10 @@ def upload_file(user_activity_id):
         current_app.logger.info('%s file_to_upload', file_to_upload)
         # Uploads the result to Cloudinary
         if file_to_upload:
-            upload_result = cloudinary.uploader.upload(file_to_upload)
+            try:
+                upload_result = cloudinary.uploader.upload(file_to_upload)
+            except Exception:
+                return {"error": "Please choose a valid filetype."}
             current_app.logger.info(upload_result)
             current_app.logger.info(type(upload_result))
             # Create variable that is equal only to the image url.(Cloudinary returns quite a bit of extra info)

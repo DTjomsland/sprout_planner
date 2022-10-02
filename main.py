@@ -20,7 +20,8 @@ def create_app():
 
     CORS(app)
     logging.basicConfig(level=logging.DEBUG)
-    #verify cloud
+
+    # verify cloud
     app.logger.info('%s',os.getenv('CLOUD_NAME'))
     app.config.from_object("config.app_config")
 

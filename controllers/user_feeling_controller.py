@@ -1,6 +1,7 @@
 from flask import Blueprint, jsonify, request
 from main import db
 from models.user_feeling import UserFeeling
+from marshmallow.exceptions import ValidationError
 from flask_jwt_extended import get_jwt_identity, jwt_required
 from schemas.user_feeling_schema import user_feeling_schema, user_feelings_schema
 
@@ -46,7 +47,7 @@ def new_feeling():
     db.session.commit()
     return jsonify((user_feeling_schema).dump(feeling))
 
-
+# Update a user feeling
 @user_feeling.route("/<int:user_feeling_id>", methods=["PUT"])
 @jwt_required()
 def update_feeling(user_feeling_id):
@@ -84,3 +85,8 @@ def delete_feeling(user_feeling_id):
     db.session.commit()
     # Return message if deleted successfully
     return {"message": "Feeling deleted successfully."}
+
+# Validation error messages
+@user_feeling.errorhandler(ValidationError)
+def register_validation_error(error):
+    return error.messages, 400

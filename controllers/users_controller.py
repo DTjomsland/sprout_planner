@@ -1,6 +1,7 @@
 from flask import Blueprint, jsonify, request, abort
 from main import db, bcrypt
 from models.users import Users
+from marshmallow.exceptions import ValidationError
 from flask_jwt_extended import  create_access_token
 from datetime import timedelta
 from schemas.users_schema import user_schema
@@ -54,3 +55,10 @@ def account_login():
     # Return the access token with the user_name(For Display Use)
     access_token = create_access_token(identity=str(user.user_id), expires_delta=timedelta(days=1))
     return jsonify({"user": user.user_name, "token": access_token})
+
+
+# Validation error messages
+@users.errorhandler(ValidationError)
+def register_validation_error(error):
+
+    return error.messages, 400

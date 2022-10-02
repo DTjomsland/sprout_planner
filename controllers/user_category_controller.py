@@ -2,6 +2,7 @@ from flask import Blueprint, jsonify, request
 from main import db
 from models.user_category import UserCategory
 from flask_jwt_extended import get_jwt_identity, jwt_required
+from marshmallow.exceptions import ValidationError
 from schemas.user_category_schema import user_category_schema, user_categories_schema
 
 # Default route for all user category requests
@@ -45,7 +46,7 @@ def new_category():
     db.session.commit()
     return jsonify((user_category_schema).dump(category))
 
-
+# Update a user category
 @user_category.route("/<int:user_category_id>", methods=["PUT"])
 @jwt_required()
 def update_category(user_category_id):
@@ -83,5 +84,4 @@ def delete_category(user_category_id):
     db.session.commit()
     # Return message if deleted successfully
     return {"message": "Category deleted successfully."}
-
 

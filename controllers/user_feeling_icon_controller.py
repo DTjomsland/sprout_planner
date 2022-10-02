@@ -1,8 +1,10 @@
 import os
 from flask import Blueprint, jsonify, request, current_app
 from main import db
+from sqlalchemy import exc
 from models.user_feeling_icon import UserFeelingIcon
 from flask_jwt_extended import jwt_required
+from marshmallow.exceptions import ValidationError
 from schemas.user_feeling_icon_schema import user_feeling_icon_schema, user_feeling_icons_schema
 import cloudinary
 import cloudinary.uploader
@@ -13,14 +15,14 @@ from flask import jsonify
 load_dotenv()
 
 
-# Default route for all user icon requests
+# Default route for all user feeling icon requests
 user_feeling_icon = Blueprint('user_feeling_icon', __name__, url_prefix='/userfeelingicon')
-# Get request for user icon linked with a specific feeling
+# Get request for user feeling icon linked with a specific feeling
 @user_feeling_icon.route('/<int:user_feeling_id>', methods=['GET'])
 def get_user_feeling_icons(user_feeling_id):
-    # Search for all instances in the icon table where a row contains the feeling_id
+    # Search for all instances in the feeling icon table where a row contains the feeling_id
     icons = db.session.query(UserFeelingIcon).with_entities(UserFeelingIcon.user_feeling_icon_id, UserFeelingIcon.user_feeling_icon_url).filter(UserFeelingIcon.user_feeling_id == user_feeling_id)
-    # Returns jsonified icon for the specific feeling
+    # Returns jsonified feeling icon for the specific feeling
     result = user_feeling_icons_schema.dump(icons)
     return jsonify(result)
 
@@ -37,23 +39,25 @@ def upload_file(user_feeling_id):
     image_check = UserFeelingIcon.query.filter_by(user_feeling_id = feeling).first()
     if image_check:
         return {"error": "An image is already associated with this feeling."}
-
     current_app.logger.info('in upload route')
-    # Pulls Cloudinary  information form .env
+    # Pulls Cloudinary information fromm .env
     cloudinary.config(cloud_name = os.getenv('CLOUD_NAME'), api_key=os.getenv('API_KEY'), api_secret=os.getenv('API_SECRET'))
     upload_result = None
     # Enables retrieval of client data
     if request.method == 'POST':
         file_to_upload = request.files['file']
         current_app.logger.info('%s file_to_upload', file_to_upload)
-        # Uploads the result to Cloudinary
+        # Uploads the result to Cloudinary/catches error if the file type is wrong
         if file_to_upload:
-            upload_result = cloudinary.uploader.upload(file_to_upload)
+            try:
+                upload_result = cloudinary.uploader.upload(file_to_upload)
+            except Exception:
+                return {"error": "Please choose a valid file type."}
             current_app.logger.info(upload_result)
             current_app.logger.info(type(upload_result))
             # Create variable that is equal only to the image url.(Cloudinary returns quite a bit of extra info)
             image_url = upload_result.get('url')
-            # Create a new icon object from the returned url and route variable
+            # Create a new feeling icon object from the returned url and route variable
             icon = UserFeelingIcon(
                 user_feeling_icon_url = image_url,
                 user_feeling_id = feeling
@@ -62,13 +66,13 @@ def upload_file(user_feeling_id):
             db.session.commit()
             return jsonify((user_feeling_icon_schema).dump(icon))
 
-# Delete user icon
+# Delete user feeling icon
 @user_feeling_icon.route("/<int:user_feeling_icon_id>", methods=["DELETE"])
 @jwt_required()
 def delete_icon(user_feeling_icon_id):
-    # Find the icon by id
+    # Find the feeling icon by id
     icon = UserFeelingIcon.query.get(user_feeling_icon_id)
-    # Display error if icon is not found
+    # Display error if feeling icon is not found
     if not icon:
         return {"error": "Image not found"}
     # Delete the category from the database (Deletes all associated feelings)
@@ -78,3 +82,4 @@ def delete_icon(user_feeling_icon_id):
 
     # Return message if deleted successfully
     return {"message": "Image deleted successfully"}
+
