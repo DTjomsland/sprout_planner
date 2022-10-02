@@ -51,6 +51,22 @@ This problem needs to be solved because far too many individuals are unable to c
 
 <br>
 
+## Task Allocation and Tracking
+### Overview
+
+Trello Link: https://trello.com/b/Uvv1FNzD/sprout-planner
+
+Task allocation and tracking were done through the use of the online tool Trello.  Tasks were organized by the columns "To-do", "Doing", and "Done". Tasks were assigned due dates based on the need for completion. For instance, all planning tasks were given quicker deadlines than coding tasks. Each task was assigned a label to signify what kind of task it is.  Setup tasks were given green labels with the word "Setup" inside.  Coding tasks were given a yellow label with the word "Coding" inside. Finalization tasks were given an orange label with the word "Finalization" inside.  The order of completion was the following: Setup, Coding, then Finalization. Within these task are checklists that must be completed before the task can be moved to the "Done" column. When a task is begun, the task would be moved to the "Doing" column.  When a task is completed it would be moved to the "Done" column. If code in one of the completed tasks broke or a new idea needed to be implemented, the related task would be moved back to the "Doing" column. 
+
+Full Trello Board:
+
+![image](images/trello.PNG)
+
+Trello Task:
+
+![image](images/routechecklist.PNG)
+
+<br>
 ## Chosen Database System
 
 The database system used for this API is PostgreSQL.  PostgreSQL is an open source object-relational database system that utilizes the SQL language.  I chose PostgreSQL due to it's track record  of being scalable, secure, and ensuring data integrity. PostgreSQL is also beginner friendly. Since this is my first API, that played a large role in choosing it. 
@@ -203,21 +219,7 @@ This application utilizes Cloudinary for its image uploading and storage. In the
 <br>
 
 
-## Task Allocation and Tracking
-### Overview
 
-Trello Link: https://trello.com/b/Uvv1FNzD/sprout-planner
-
-Task allocation and tracking were done through the use of the online tool Trello.  Tasks were organized by the columns "To-do", "Doing", and "Done". Tasks were assigned due dates based on the need for completion. For instance, all planning tasks were given quicker deadlines than coding tasks. Each task was assigned a label to signify what kind of task it is.  Setup tasks were given green labels with the word "Setup" inside.  Coding tasks were given a yellow label with the word "Coding" inside. Finalization tasks were given an orange label with the word "Finalization" inside.  The order of completion was the following: Setup, Coding, then Finalization. Within these task are checklists that must be completed before the task can be moved to the "Done" column. When a task is begun, the task would be moved to the "Doing" column.  When a task is completed it would be moved to the "Done" column. If code in one of the completed tasks broke or a new idea needed to be implemented, the related task would be moved back to the "Doing" column. 
-
-Full Trello Board:
-![image](images/trello.PNG)
-
-Trello Task:
-![image](images/routechecklist.PNG)
-
-
-<br>
 
 ## API Endpoints
 
