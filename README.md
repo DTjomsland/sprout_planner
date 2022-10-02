@@ -71,7 +71,7 @@ AS customers_email
 FROM customers
 ```
 
-Object-relational-mappers allow for this same query to be created using the preferred language of the developer. Typically, when the word ORM is used, it is referring to the library that facilitates this technique. Below is an example of the same query from above written for a Python Flask application.
+Object-relational-mappers allow for this same query to be created using the preferred language of the developer. Typically, when the word ORM is used, it is referring to the library that facilitates this technique. Below is an example of the same query from above written for a Python Flask application using SQLAlchemy.
 
 ```
 result = session.query(Customers).all()
@@ -82,7 +82,9 @@ result = session.query(Customers).all()
 - ORMs are jam packed with powerful features such as support migrations and seeding.
 - Queries written using ORM are often perform much better than programmer written SQL statements. 
 - You can use an ORM without have much to any SQL knowledge.
+- Improves the maintainability of your code.
 - Most importantly, it speeds up the development process which reduces development time and costs.
+
 <br>
 
 ## Third Party Services:
@@ -198,9 +200,13 @@ This application utilizes Cloudinary for its image uploading and storage. In the
 - <strong>UserFeeling and UserFeelingIcon:</strong>
     The relationship between UserFeeling and UserFeelingIcon is a one-to-one relationship.  This means that each feeling is associated with one just one feeling icon, and the same is true for the reverse. This is achieved by using the primary key in UserFeeling as the foreign key in UserFeelingIcon.  Since each feeling icon is only attached to one feeling, which is only attached to one user, each feeling icon is only attached to one user. If the feeling associated with a feeling icon is deleted, the feeling icon will be deleted as well.
 
-
-
 <br>
+
+
+## Task Allocation and Tracking
+
+
+
 
 ## API Endpoints
 
