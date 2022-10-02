@@ -14,7 +14,7 @@ class UserFeelingSchema(ma.Schema):
     # Validations
     user_feeling_name = ma.String(required=True, validate=Length(min=1))
 
-# single user feeling schema
+# Single user feeling schema
 user_feeling_schema = UserFeelingSchema()
 
 # Multiple user feeling schema

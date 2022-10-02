@@ -1,8 +1,8 @@
-from flask import Blueprint, jsonify, request
 from main import db
-from models.user_category import UserCategory
+from flask import Blueprint, jsonify, request
 from flask_jwt_extended import get_jwt_identity, jwt_required
 from marshmallow.exceptions import ValidationError
+from models.user_category import UserCategory
 from schemas.user_category_schema import user_category_schema, user_categories_schema
 
 # Default route for all user category requests
@@ -85,3 +85,7 @@ def delete_category(user_category_id):
     # Return message if deleted successfully
     return {"message": "Category deleted successfully."}
 
+# Validation error messages
+@user_category.errorhandler(ValidationError)
+def register_validation_error(error):
+    return error.messages, 400

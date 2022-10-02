@@ -5,7 +5,8 @@ class UserIconSchema(ma.Schema):
     class Meta:
         fields = ['user_icon_id', 'user_icon_url', 'user_activity_id']
         load_only = ['user_activity_id']
-# single user icon schema
+
+# Single user icon schema
 user_icon_schema = UserIconSchema()
 
 # Multiple user icon schema

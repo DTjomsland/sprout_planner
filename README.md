@@ -278,7 +278,7 @@ Expected Response Example:
 
 HTTP Request Verb: POST
 
-Authentication Requirement: Token generated on login
+Authentication Requirement: Bearer token generated on login
 
 Required Data Example:
 
@@ -311,7 +311,7 @@ Expected Response Example Two (If the user has created that category already):
 
 HTTP Request Verb: GET
 
-Authentication Requirement: Token generated on login
+Authentication Requirement: Bearer token generated on login
 
 Expected Response Example:
 ```
@@ -337,7 +337,7 @@ Expected Response Example:
 
 HTTP Request Verb: PUT
 
-Authentication Requirement: Token generated on login
+Authentication Requirement: Bearer token generated on login
 
 Required Data Example:
 
@@ -369,7 +369,7 @@ Expected Response Example Two (If the user has used that category name already):
 
 HTTP Request Verb: DELETE
 
-Authentication Requirement: Token generated on login
+Authentication Requirement: Bearer token generated on login
 
 Expected Response Example One (If user category exists):
 
@@ -394,7 +394,7 @@ Expected Response Example Two (If user category doesn't exist):
 
 HTTP Request Verb: POST
 
-Authentication Requirement: Token generated on login
+Authentication Requirement: Bearer token generated on login
 
 Required Data Example:
 
@@ -429,7 +429,7 @@ Expected Response Example Two (If the user has used that activity name already):
 
 HTTP Request Verb: GET
 
-Authentication Requirement: Token generated on login
+Authentication Requirement: Bearer token generated on login
 
 Expected Response Example:
 ```
@@ -452,7 +452,7 @@ Expected Response Example:
 
 HTTP Request Verb: PUT
 
-Authentication Requirement: Token generated on login
+Authentication Requirement: Bearer token generated on login
 
 Required Data Example:
 
@@ -485,7 +485,7 @@ Expected Response Example 2 (If the user has used that category name already):
 
 HTTP Request Verb: DELETE
 
-Authentication Requirement: Token generated on login
+Authentication Requirement: Bearer token generated on login
 
 Expected Response One (If user activity exists):
 
@@ -510,7 +510,7 @@ Expected Response Two (If user activity doesn't exist):
 
 HTTP Request Verb: POST
 
-Authentication Requirement: Token generated on login
+Authentication Requirement: Bearer token generated on login
 
 Required Data Example (image upload):
 
@@ -532,13 +532,20 @@ Expected Response Example Two (If the activity did have an associated image):
     "error": "An image is already associated with this activity."
 }
 ```
+Expected Response Example Three (If the wrong filetype is uploaded):
+```
+{
+    "error": "Please choose a valid file type."
+}
+```
+
 <br>
 
 ### <strong>Endpoint: </strong>/usericon/\<int:user_activity_id>
 
 HTTP Request Verb: GET
 
-Authentication Requirement: Token generated on login
+Authentication Requirement: Bearer token generated on login
 
 Expected Response Example:
 ```
@@ -557,7 +564,7 @@ Expected Response Example:
 
 HTTP Request Verb: DELETE
 
-Authentication Requirement: Token generated on login
+Authentication Requirement: Bearer token generated on login
 
 Expected Response One (If user icon exists):
 
@@ -582,7 +589,7 @@ Expected Response Two (If user icon doesn't exist):
 
 HTTP Request Verb: POST
 
-Authentication Requirement: Token generated on login
+Authentication Requirement: Bearer token generated on login
 
 Required Data Example:
 
@@ -614,7 +621,7 @@ Expected Response Example Two (If the user has created that feeling already):
 
 HTTP Request Verb: GET
 
-Authentication Requirement: Token generated on login
+Authentication Requirement: Bearer token generated on login
 
 Expected Response Example:
 ```
@@ -641,7 +648,7 @@ Expected Response Example:
 
 HTTP Request Verb: PUT
 
-Authentication Requirement: Token generated on login
+Authentication Requirement: Bearer token generated on login
 
 Required Data Example:
 
@@ -674,7 +681,7 @@ Expected Response Example Two (If the user has used that feeling name already):
 
 HTTP Request Verb: DELETE
 
-Authentication Requirement: Token generated on login
+Authentication Requirement: Bearer token generated on login
 
 Expected Response One (If user feeling exists):
 
@@ -698,7 +705,7 @@ Expected Response Two (If user feeling doesn't exist):
 ### <strong>Endpoint: </strong>/userfeelingicon/\<int:user_feeling_id>/upload
 HTTP Request Verb: POST
 
-Authentication Requirement: Token generated on login
+Authentication Requirement: Bearer token generated on login
 
 Required Data Example (image upload):
 
@@ -720,6 +727,12 @@ Expected Response Example Two (If the feeling did have an associated image):
     "error": "An image is already associated with this feeling."
 }
 ```
+Expected Response Example Three (If the wrong filetype is uploaded):
+```
+{
+    "error": "Please choose a valid file type."
+}
+```
 ---
 
 <br>
@@ -728,7 +741,7 @@ Expected Response Example Two (If the feeling did have an associated image):
 
 HTTP Request Verb: GET
 
-Authentication Requirement: Token generated on login
+Authentication Requirement: Bearer token generated on login
 
 Expected Response Example:
 ```
@@ -747,7 +760,7 @@ Expected Response Example:
 
 HTTP Request Verb: DELETE
 
-Authentication Requirement: Token generated on login
+Authentication Requirement: Bearer token generated on login
 
 Expected Response One (If feeling icon exists):
 

@@ -1,4 +1,5 @@
 alembic==1.7.7
+autopep8==1.7.0
 bcrypt==4.0.0
 certifi==2022.9.24
 click==8.0.4
@@ -22,12 +23,14 @@ marshmallow-sqlalchemy==0.27.0
 pkg_resources==0.0.0
 psycopg2==2.9.3
 psycopg2-binary==2.9.3
+pycodestyle==2.9.1
 PyJWT==2.4.0
 python-dotenv==0.20.0
 semantic-version==2.10.0
 setuptools-rust==1.1.2
 six==1.16.0
 SQLAlchemy==1.4.41
+toml==0.10.2
 typing_extensions==4.1.1
 urllib3==1.26.12
 Werkzeug==2.0.3

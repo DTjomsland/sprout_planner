@@ -1,4 +1,3 @@
-from random import seed
 from flask import Blueprint
 from main import db
 from models.users import Users
@@ -26,7 +25,8 @@ def drop_db():
 
 @db_commands.cli.command('seed')
 def seed_db():
-    # Seeding first user
+
+    # Seeding first two users
     user1 = Users(
         user_email = "user@gmail.com",
         user_name = 'Scotty',
@@ -131,7 +131,6 @@ def seed_db():
     db.session.add(feeling7)
     
 
-
     # Seeding activities
     activity1 = UserActivity(
         user_activity_name = "Jogging",
@@ -176,7 +175,6 @@ def seed_db():
     db.session.add(activity5)
     db.session.add(activity6)
     db.session.add(activity7)
-
     db.session.commit()
 
 
@@ -221,8 +219,7 @@ def seed_db():
     db.session.add(feelingicon3)
     db.session.add(feelingicon4)
     db.session.add(feelingicon5)
-    db.session.commit()
-
+    
 
     # Seeding User Icon
     icon1 =  UserIcon(

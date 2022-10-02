@@ -1,15 +1,18 @@
 import os
 from flask import Blueprint, jsonify, request, current_app
 from main import db
-from models.user_icon import UserIcon
 from flask_jwt_extended import jwt_required
+from models.user_icon import UserIcon
 from schemas.user_icon_schema import user_icon_schema, user_icons_schema
-import cloudinary
-import cloudinary.uploader
-import cloudinary.api
 from dotenv import load_dotenv
 from flask_cors import cross_origin
 from flask import jsonify
+import cloudinary
+import cloudinary.uploader
+import cloudinary.api
+
+
+
 load_dotenv()
 
 
@@ -47,7 +50,7 @@ def upload_file(user_activity_id):
     if request.method == 'POST':
         file_to_upload = request.files['file']
         current_app.logger.info('%s file_to_upload', file_to_upload)
-        # Uploads the result to Cloudinary
+        # Uploads the result to Cloudinary/catches error if the file type is wrong
         if file_to_upload:
             try:
                 upload_result = cloudinary.uploader.upload(file_to_upload)
@@ -75,7 +78,7 @@ def delete_icon(user_icon_id):
     # Display error if icon is not found
     if not icon:
         return {"error": "Image not found"}
-    # Delete the category from the database (Deletes all associated activities)
+    # Delete the icon from the database
     db.session.delete(icon)
     # Save the changes in the database
     db.session.commit()

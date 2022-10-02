@@ -1,22 +1,23 @@
 import os
-from flask import Blueprint, jsonify, request, current_app
 from main import db
-from sqlalchemy import exc
+from flask import Blueprint, jsonify, request, current_app
 from models.user_feeling_icon import UserFeelingIcon
 from flask_jwt_extended import jwt_required
-from marshmallow.exceptions import ValidationError
 from schemas.user_feeling_icon_schema import user_feeling_icon_schema, user_feeling_icons_schema
-import cloudinary
-import cloudinary.uploader
-import cloudinary.api
 from dotenv import load_dotenv
 from flask_cors import cross_origin
 from flask import jsonify
+import cloudinary
+import cloudinary.uploader
+import cloudinary.api
+
+
 load_dotenv()
 
 
 # Default route for all user feeling icon requests
 user_feeling_icon = Blueprint('user_feeling_icon', __name__, url_prefix='/userfeelingicon')
+
 # Get request for user feeling icon linked with a specific feeling
 @user_feeling_icon.route('/<int:user_feeling_id>', methods=['GET'])
 def get_user_feeling_icons(user_feeling_id):
@@ -75,7 +76,7 @@ def delete_icon(user_feeling_icon_id):
     # Display error if feeling icon is not found
     if not icon:
         return {"error": "Image not found"}
-    # Delete the category from the database (Deletes all associated feelings)
+    # Delete the feeling icon
     db.session.delete(icon)
     # Save the changes in the database
     db.session.commit()

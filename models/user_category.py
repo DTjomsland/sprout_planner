@@ -1,7 +1,4 @@
 from main import db
-from flask import jsonify, request
-import jwt
-from functools import wraps
 
 class UserCategory(db.Model):
     __tablename__="user_category"

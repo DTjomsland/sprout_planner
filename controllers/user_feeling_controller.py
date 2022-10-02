@@ -1,8 +1,8 @@
-from flask import Blueprint, jsonify, request
 from main import db
-from models.user_feeling import UserFeeling
+from flask import Blueprint, jsonify, request
 from marshmallow.exceptions import ValidationError
 from flask_jwt_extended import get_jwt_identity, jwt_required
+from models.user_feeling import UserFeeling
 from schemas.user_feeling_schema import user_feeling_schema, user_feelings_schema
 
 # Default route for all user feeling requests

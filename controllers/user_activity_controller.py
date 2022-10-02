@@ -1,8 +1,8 @@
-from flask import Blueprint, jsonify, request, abort
 from main import db
+from flask import Blueprint, jsonify, request
 from flask_jwt_extended import jwt_required
-from models.user_activity import UserActivity
 from marshmallow.exceptions import ValidationError
+from models.user_activity import UserActivity
 from schemas.user_activity_schema import user_activity_schema, user_activities_schema
 
 # Default route for all user activity requests
