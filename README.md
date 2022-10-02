@@ -47,7 +47,7 @@ The problem I am trying to solve with this application is the lack of a means fo
 
 ## Why It Needs to be Solved
 
-This problem needs to be solved because far too many individuals are unable to communicate their feelings and wants verbally. After my time in the disabilities sector, I've noticed many individuals with disabilities are often times coasting through their days, doing what others want them to do because they are unable to communicate what they want and feel. This often leads to frustration and a feeling of helplessness. Everyone deserves a voice, and this API intends on facilitating that.  There are a few visual planner on the market currently, but all of them are too feature rich and complicated.  Often times, they allow for the user to delete, edit, and plan their day all on one page which leads to accidental modifications.  This app intends allow whoever is assisting the user (ex: support worker/family) to enter the planner section of the app and hand it off to the user while ensuring that there is no possibility of accidental modifications to the structure/activities. 
+This problem needs to be solved because far too many individuals are unable to communicate their feelings and wants verbally. After my time in the disabilities sector, I've noticed many individuals with disabilities are often coasting through their days, doing what others want them to do because they are unable to communicate what they want and feel. This often leads to frustration and a feeling of helplessness. Everyone deserves a voice, and this API intends on facilitating that.  There are a few visual planner on the market currently, but all of them are too feature rich and complicated.  Often times, they allow for the user to delete, edit, and plan their day all on one page which leads to accidental modifications.  This app intends allow whoever is assisting the user (ex: support worker/family) to enter the planner section of the app and hand it off to the user while ensuring that there is no possibility of accidental modifications to the structure/activities. 
 
 <br>
 
@@ -154,36 +154,52 @@ This application utilizes Cloudinary for its image uploading and storage. In the
 ## Project Model Relations
 *Relations are available visually in the ERD section above.*
 
-### User:
+### Users:
+The Users model represents a table of all the data relevant to identifying a user. This model consists of four columns: `user_id`, `user_name`, `user_email`, and `user_password`. Added to these are two relationships: `categories` and `feelings` which form one-to-many relationships with UserCategory and UserFeeling models, respectively. The User model essentially represents the parent object of all other models and if an entry is deleted, all of it's children and children's children will be deleted as well.
+
 - Every user is identified by the primary key: user_id
 - Every user has a one-to-many relationship with The UserCategory and UserFeelingTable. Every User can create many user categories and user feelings.
 - UserCategory and UserFeeling contain  the foreign key: user_id. 
 - User categories and user feelings only have one user linked to them.
 
+<br>
+
 ### UserCategory:
+The UserCategory model represents a table of all the data relevant to the user categories.  This model consists of three columns: `user_category_id`, `user_category_name`, and `user_id`. The column `user_id` contains a foreign key for the User model, which takes part in forming the relationship between the two. Added to these columns is one relationship: `activities` which forms a one-to-many relationship between the UserCategory and UserActivity models. The UserCategory model represents the parent object of the UserActivity model.  If an entry is deleted in UserCategory, all of it's children and children's children will be deleted as well.
+
 - Every user category is identified by the primary key: user_category_id.
 - Every user category has a one-to-many relationship with the UserActivity table. Every category can be linked to many user activities.
 - UserActivity contains the foreign key: user_category_id.
 - User activities can only have one category linked to them. Since each category can only have one user, each activity is only linked to one user.
 
+<br>
+
 ### UserActivity:
+The UserActivity model represents a table of all other date relevant to user activities. This model consists of three columns: `user_activity_id`, `user_activity_name`, `user_category_id`.  The column `user_category_id` contains the foreign key for the UserCategory model, which takes part in forming the relationship between the two. Added to these columns is one relationship: `icons` which forms a one-to-many relationship between the UserActivity and UserIcon models. The UserActivity model represents the parent object of the UserIcon model.  If an entry is deleted in UserActivity, all of it's children will be deleted as well.
+
 - Every user activity is identified by the primary key: user_activity_id.
 - Every user activity has a one-to-one relationship with the UserIcon table. Every activity can be linked to only one user icon.
 - UserIcon contains the foreign key: user_activity_id.
 - User icons can only have one user activity linked to them. Since each activity can only be linked to one category, and each category can only be linked to one user, each icon is only linked to one user.
 
 ### UserIcon:
+The UserIcon model represents a table of all the data relevant to user icons.  This model consists of three columns: `user_icon_id`, `user_icon_url`, and `user_activity_id`. The column `user_activity_id` contains the foreign key for the UserActivity model, which takes part in forming the relationship between the two.
+
 - Every user icon is identified by the primary key: user_icon_id.
 - The primary key for UserIcons is not featured in any other tables.
 - UserIcon contains the foreign key: user_activity_id.
 
 ### UserFeeling:
+The UserFeeling model represents a table of all the data relevant to the user feelings.  This model consists of three columns: `user_feeling_id`, `user_feeling_name`, and `user_id`. The column `user_id` contains a foreign key for the User model, which takes part in forming the relationship between the two. Added to these columns is one relationship: `feeling_icon` which represents a one-to-many relationship between the UserFeeling and UserFeelingIcons models. The UserFeeling model represents the parent object of the UserFeelingIcons model.  If an entry is deleted in UserFeeling, all of it's children will be deleted as well.
+
 - Every user feeling is identified by the primary key: user_feeling_id.
 - Every user feeling has a one-to-one relationship with the UserFeelingIcon table. Every activity can be linked to only one user icon.
 - UserFeelingIcon contains the foreign key: user_feeling_id.
 - User feeling icons can only have one user feeling linked to them. Since each feeling  can only be linked to one user, each user feeling icon is only linked to one user.
 
 ### UserFeelingIcon:
+The UserFeelingIcon model represents a table of all the data relevant to user icons.  This model consists of three columns: `user_feeling_icon_id`, `user_feeling_icon_url`, and `user_feeling_id`. The column `user_feeling_id` contains the foreign key for the UserFeeling model, which takes part in forming the relationship between the two.
+
 - Every user feeling icon is identified by the primary key: user_feeling_icon_id.
 - The primary key for UserFeelingIcon is not featured in any other tables.
 - UserIcon contains the foreign key: user_feeling_id.

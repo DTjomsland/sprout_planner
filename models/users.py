@@ -12,9 +12,13 @@ class Users(db.Model):
     categories = db.relationship(
         "UserCategory",
         backref= "user",
+        # Ensure the children of the feeling are deleted along with
+        cascade="all, delete-orphan"
     )
     feelings = db.relationship(
         "UserFeeling",
         backref= "user",
+        # Ensure the children of the feeling are deleted along with
+        cascade="all, delete-orphan"
     )
     
